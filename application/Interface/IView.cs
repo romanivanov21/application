@@ -11,5 +11,8 @@ namespace application.Interface
     interface IView
     {
         void WindowInit(List<Entry> mainListView);
+        ListView GetMainListView();
+
+        event EventHandler mainListVliewSelectionChanged;
     }
 }

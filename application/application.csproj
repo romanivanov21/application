@@ -63,6 +63,7 @@
     </Compile>
     <Compile Include="Controller\Controller.cs" />
     <Compile Include="Interface\IView.cs" />
+    <Compile Include="Interface\IViewFind.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

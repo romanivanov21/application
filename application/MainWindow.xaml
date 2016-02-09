@@ -4,15 +4,15 @@
         Title="MainWindow" Height="684.328" Width="850.374">
     <Grid  ShowGridLines="True">
         <Grid.RowDefinitions>
-            <RowDefinition Height="55*"></RowDefinition>
-            <RowDefinition Height="306*"></RowDefinition>
+            <RowDefinition Height="180*"></RowDefinition>
+            <RowDefinition Height="473*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="151*"></ColumnDefinition>
-            <ColumnDefinition Width="459*"></ColumnDefinition>
-            <ColumnDefinition Width="151*"></ColumnDefinition>
+            <ColumnDefinition Width="183*"></ColumnDefinition>
+            <ColumnDefinition Width="505*"></ColumnDefinition>
+            <ColumnDefinition Width="154*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <ListView Name="mainListVliew_" Grid.Column="1" Margin="10" Grid.Row="1">
+        <ListView Name="mainListVliew_" Grid.Column="1" Margin="10" Grid.Row="1" SelectionChanged="mainListVliew__SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridView.Columns>
@@ -29,5 +29,12 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <TextBox x:Name="FindBoxs" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="11,68,0,0" TextWrapping="Wrap" Text="Поиск" VerticalAlignment="Top" Width="423" GotKeyboardFocus="FindBoxs_GotKeyboardFocus">
+
+        </TextBox>
+        <Button Content="Найти" Grid.Column="1" HorizontalAlignment="Left" Margin="446,68,0,0" VerticalAlignment="Top" Width="50" Height="23"/>
+        <RadioButton x:Name="DateFindRadio" Content="Поиск по дате" Grid.Column="1" HorizontalAlignment="Left" Margin="11,35,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.047,0.333" Width="106" Checked="DateFindRadio_Checked" Height="15"/>
+        <RadioButton x:Name="DescriptionFindRadio" Content="Поиск по описанию" Grid.Column="1" HorizontalAlignment="Left" Margin="205,35,0,0" VerticalAlignment="Top" Width="133" Checked="DescriptionFindRadio_Checked" Height="15"/>
+        <Calendar HorizontalAlignment="Left" Width="173" Margin="0,0,0,10"/>
     </Grid>
 </Window>
