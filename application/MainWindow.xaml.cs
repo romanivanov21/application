@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -38,7 +39,7 @@ namespace application
             return mainListVliew_;
         }
 
-        public void WindowInit(List<Entry> mainListView)
+        public void ListViewUpdate(List<Entry> mainListView)
         {
             mainListVliew_.ItemsSource = mainListView;
             mainListVliew_.Items.Refresh();
@@ -58,6 +59,36 @@ namespace application
 
         #endregion
 
+        #endregion
+
+        #region IViewFind
+
+        #region Методы
+
+        public string GetSelectedMainCalendarDate()
+        {
+            return MainCalendar.SelectedDate.Value.ToShortDateString();
+        }
+
+        public void FindBoxSetText(string text)
+        {
+            FindBoxs.Text = text;
+        }
+
+        public bool isDateFindRadiEnabeled()
+        {
+            return DateFindRadio.IsChecked.Value;
+        }
+
+        public string GetFindBoxText()
+        {
+            return FindBoxs.Text;
+        }
+
+        #endregion
+
+        #region События 
+
         private void DateFindRadio_Checked(object sender, RoutedEventArgs e)
         {
             if (dateFindRadioChecked != null)
@@ -65,21 +96,6 @@ namespace application
                 dateFindRadioChecked(sender, e);
             }
         }
-
-        #endregion
-
-        #region IViewFind
-
-        #region Методы
-
-        public void FindBoxSetText(string text)
-        {
-            FindBoxs.Text = text;
-        }
-
-        #endregion
-
-        #region События 
 
         private void DescriptionFindRadio_Checked(object sender, RoutedEventArgs e)
         {
@@ -89,8 +105,6 @@ namespace application
             }
         }
 
-        #endregion
-
         private void FindBoxs_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             if (findBoxsGotKeyboardFocus != null)
@@ -99,14 +113,35 @@ namespace application
             }
         }
 
+        private void FindButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (findButtonClick != null)
+            {
+                findButtonClick(sender, e);
+            }
+        }
+
+        private void MainCalendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (mainCalendarSelectedDatesChanged != null)
+            {
+                mainCalendarSelectedDatesChanged(sender, e);
+            }
+        }
+
+        #endregion
+
         #endregion
 
         public event EventHandler mainListVliewSelectionChanged;
 
+        public event EventHandler mainCalendarSelectedDatesChanged;
         public event EventHandler dateFindRadioChecked;
         public event EventHandler descriptionFindRadioChecked;
         public event EventHandler findBoxsGotKeyboardFocus;
+        public event EventHandler findButtonClick;
 
         private application.Controller.Controller conteroller_;
+
     }
 }

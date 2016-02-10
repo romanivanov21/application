@@ -11,7 +11,12 @@ namespace application.Interface
         event EventHandler dateFindRadioChecked;
         event EventHandler descriptionFindRadioChecked;
         event EventHandler findBoxsGotKeyboardFocus;
+        event EventHandler findButtonClick;
+        event EventHandler mainCalendarSelectedDatesChanged;
 
         void FindBoxSetText(string text);
+        string GetFindBoxText();
+        string GetSelectedMainCalendarDate();
+        bool isDateFindRadiEnabeled();
     }
 }

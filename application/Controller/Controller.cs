@@ -25,7 +25,7 @@ namespace application.Controller
             #region Интерфейс IView
 
             view_ = view;
-            view_.WindowInit(model_.EntryesList);
+            view_.ListViewUpdate(model_.EntryesList);
             view_.mainListVliewSelectionChanged += MainListVliewSelectionChanged;
 
             #endregion
@@ -36,6 +36,8 @@ namespace application.Controller
             viewFind_.dateFindRadioChecked += DateFindRadioChecked;
             viewFind_.descriptionFindRadioChecked += DescriptionFindRadioChecked;
             viewFind_.findBoxsGotKeyboardFocus += FindBoxsGotKeyboardFocus;
+            viewFind_.findButtonClick += FindButtonClick;
+            viewFind_.mainCalendarSelectedDatesChanged += MainCalendarSelectedDatesChanged;
 
             #endregion
         }
@@ -68,10 +70,33 @@ namespace application.Controller
             viewFind_.FindBoxSetText("");
         }
 
+        private void FindButtonClick(object sender, EventArgs e)
+        {
+            string findBoxText = viewFind_.GetFindBoxText();
+            #warning TDDO:Проверка данных на вилидность
+            if ((findBoxText == "") || (findBoxText == "Поиск") || (findBoxText == "Поиск по дате") || (findBoxText == "Поиск по описанию"))
+            {
+                MessageBox.Show("Введите параметры поиска");
+            }
+            else if(viewFind_.GetSelectedMainCalendarDate() == viewFind_.GetFindBoxText())
+            {
+                view_.ListViewUpdate(model_.GetEnrtyesOfDate(viewFind_.GetFindBoxText()));
+            }
+        }
+
+        private void MainCalendarSelectedDatesChanged(object sender, EventArgs e)
+        {
+            if (viewFind_.isDateFindRadiEnabeled())
+            {
+                viewFind_.FindBoxSetText(viewFind_.GetSelectedMainCalendarDate());
+            }    
+        }
+        
         #endregion
 
         private ModelTest model_;
         private IView view_;
         private IViewFind viewFind_;
+
     }
 }

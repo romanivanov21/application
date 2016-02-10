@@ -34,9 +34,14 @@ namespace application.Model
             img1_.SetValue(Image.SourceProperty, imgs.ConvertFromString(@"..\\..\\IMG\IMG_0376.JPG"));
             entryes_.Add(new Entry(DateTime.Now.ToShortDateString(), img1_.Source, "Запись1"));
             img1_.SetValue(Image.SourceProperty, imgs.ConvertFromString(@"..\\..\\IMG\IMG_0261.JPG"));
-            entryes_.Add(new Entry(DateTime.Now.ToShortDateString(), img1_.Source, "Запись2"));
+            entryes_.Add(new Entry("01.02.2016", img1_.Source, "Запись2"));
             entryes_.Add(new Entry(DateTime.Now.ToShortDateString(), img1_.Source, "Запись3"));
         }
+        public List<Entry> GetEnrtyesOfDate(string date)
+        {
+            return entryes_.FindAll(x => (x.date_ == date));
+        }
+
         Image img1_;
         private List<Entry> entryes_;
     }
