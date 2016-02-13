@@ -41,6 +41,17 @@ namespace application
 
         public void ListViewUpdate(List<Entry> mainListView)
         {
+            ViewEntryes viewButton;
+            if (mainListView.Count <= 3)
+            {
+                BackPage.IsEnabled = false;
+                NextPage.IsEnabled = false;
+            }
+            else
+            {
+                viewButton = new ViewEntryes(mainGrid, ViewEntryes.GetPagesCount(mainListView.Count));
+                
+            }
             mainListVliew_.ItemsSource = mainListView;
             mainListVliew_.Items.Refresh();
         }
@@ -67,11 +78,16 @@ namespace application
 
         public string GetSelectedMainCalendarDate()
         {
-            return MainCalendar.SelectedDate.Value.ToShortDateString();
+            if (MainCalendar.SelectedDate != null)
+            {
+                return MainCalendar.SelectedDate.Value.ToShortDateString();
+            }
+            return MainCalendar.DisplayDate.ToShortDateString();
         }
 
         public void FindBoxSetText(string text)
         {
+            FindBoxs.Text = "";
             FindBoxs.Text = text;
         }
 

@@ -36,10 +36,23 @@ namespace application.Model
             img1_.SetValue(Image.SourceProperty, imgs.ConvertFromString(@"..\\..\\IMG\IMG_0261.JPG"));
             entryes_.Add(new Entry("01.02.2016", img1_.Source, "Запись2"));
             entryes_.Add(new Entry(DateTime.Now.ToShortDateString(), img1_.Source, "Запись3"));
+            entryes_.Add(new Entry("10.03.2015", img1_.Source, "Запись4"));
+            entryes_.Add(new Entry("09.03.2015", img1_.Source, "Запись5"));
+            entryes_.Add(new Entry(DateTime.Now.ToShortDateString(), img1_.Source, "Запись6"));
+            entryes_.Add(new Entry(DateTime.Now.ToShortDateString(), img1_.Source, "Запись7"));
         }
-        public List<Entry> GetEnrtyesOfDate(string date)
+        public List<Entry> GetEnrtyesByDate(string date)
         {
             return entryes_.FindAll(x => (x.date_ == date));
+        }
+        public List<Entry> GetThreeLastEntryes()
+        {
+            List<Entry> res = new List<Entry>();
+            int lastIndex = entryes_.Count;
+            res.Add(entryes_[lastIndex - 1]);
+            res.Add(entryes_[lastIndex - 2]);
+            res.Add(entryes_[lastIndex - 3]);
+            return res;
         }
 
         Image img1_;

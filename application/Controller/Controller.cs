@@ -25,7 +25,7 @@ namespace application.Controller
             #region Интерфейс IView
 
             view_ = view;
-            view_.ListViewUpdate(model_.EntryesList);
+            view_.ListViewUpdate(model_.GetThreeLastEntryes());
             view_.mainListVliewSelectionChanged += MainListVliewSelectionChanged;
 
             #endregion
@@ -57,7 +57,14 @@ namespace application.Controller
 
         public void DateFindRadioChecked(object sender, EventArgs e)
         {
-            viewFind_.FindBoxSetText("Поиск по дате");
+            if (viewFind_.GetSelectedMainCalendarDate() != null)
+            {
+                viewFind_.FindBoxSetText(viewFind_.GetSelectedMainCalendarDate());
+            }
+            else
+            {
+                viewFind_.FindBoxSetText("Поиск по дате");
+            }
         }
 
         public void DescriptionFindRadioChecked(object sender, EventArgs e)
@@ -73,14 +80,14 @@ namespace application.Controller
         private void FindButtonClick(object sender, EventArgs e)
         {
             string findBoxText = viewFind_.GetFindBoxText();
-            #warning TDDO:Проверка данных на вилидность
+            #warning: TDDO:Проверка данных на вилидность
             if ((findBoxText == "") || (findBoxText == "Поиск") || (findBoxText == "Поиск по дате") || (findBoxText == "Поиск по описанию"))
             {
                 MessageBox.Show("Введите параметры поиска");
             }
             else if(viewFind_.GetSelectedMainCalendarDate() == viewFind_.GetFindBoxText())
             {
-                view_.ListViewUpdate(model_.GetEnrtyesOfDate(viewFind_.GetFindBoxText()));
+                view_.ListViewUpdate(model_.GetEnrtyesByDate(viewFind_.GetFindBoxText()));
             }
         }
 
