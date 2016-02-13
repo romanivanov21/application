@@ -12,35 +12,44 @@
             <ColumnDefinition Width="505*"></ColumnDefinition>
             <ColumnDefinition Width="154*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <ListView Name="mainListVliew_" Grid.Column="1" Margin="10,10,10,45" Grid.Row="1" SelectionChanged="mainListVliew__SelectionChanged">
+        <ListView Name="mainListVliew_" Grid.Column="1" Margin="10,10,10,73" Grid.Row="1" SelectionChanged="mainListVliew__SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridView.Columns>
-                        <GridViewColumn Header="Дата" Width="85" DisplayMemberBinding="{Binding date_}" />
-                        <GridViewColumn Header="Фото" Width="100">
+                        <GridViewColumn Header="Дата" Width="auto" DisplayMemberBinding="{Binding date_}" />
+                        <GridViewColumn Header="Фото" Width="auto">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Image Source="{Binding imgSource_}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Описание" Width="300" DisplayMemberBinding="{Binding title_}" />
+                        <GridViewColumn Header="Описание" Width="auto" DisplayMemberBinding="{Binding title_}" />
                     </GridView.Columns>
                 </GridView>
             </ListView.View>
         </ListView>
-        <TextBox x:Name="FindBoxs" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="11,68,0,0" TextWrapping="Wrap" Text="Поиск" VerticalAlignment="Top" Width="414" GotKeyboardFocus="FindBoxs_GotKeyboardFocus">
-            <TextBox.ToolTip>Поиск записей</TextBox.ToolTip>
-        </TextBox>
-        <Button x:Name="FindButton" Content="Найти" Grid.Column="1" HorizontalAlignment="Left" Margin="446,68,0,0" VerticalAlignment="Top" Width="50" Height="23" Click="FindButton_Click">
-            <Button.ToolTip>Начать поиск</Button.ToolTip>
-        </Button>
-        <RadioButton x:Name="DateFindRadio" Content="Поиск по дате" Grid.Column="1" HorizontalAlignment="Left" Margin="11,35,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.047,0.333" Width="106" Checked="DateFindRadio_Checked" Height="15" IsChecked="False">
-            <RadioButton.ToolTip>Поиск записей по дате</RadioButton.ToolTip>
-        </RadioButton>
-        <RadioButton x:Name="DescriptionFindRadio" Content="Поиск по описанию" Grid.Column="1" HorizontalAlignment="Left" Margin="205,35,0,0" VerticalAlignment="Top" Width="133" Checked="DescriptionFindRadio_Checked" Height="15" IsChecked="True">
-            <RadioButton.ToolTip>Поиск записей по описанию</RadioButton.ToolTip>
-        </RadioButton>
+        <Grid Name="Find" ShowGridLines="False" Grid.Column="1" Margin="10,41,10,36">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBox x:Name="FindBoxs" Height="24" TextWrapping="Wrap" Text="Поиск" VerticalAlignment="Center" GotKeyboardFocus="FindBoxs_GotKeyboardFocus" Grid.Row="1" Margin="6,17,66,10" Width="auto">
+                <TextBox.ToolTip>Поиск записей</TextBox.ToolTip>
+            </TextBox>
+            <Button x:Name="FindButton" Content="Найти" Margin="0,17,3,10" HorizontalAlignment="Right" VerticalAlignment="Center" Height="24" Click="FindButton_Click" Grid.Row="1" Width="63">
+                <Button.ToolTip>Начать поиск</Button.ToolTip>
+            </Button>
+            <RadioButton x:Name="DateFindRadio" Content="Поиск по дате" HorizontalAlignment="Left" VerticalAlignment="Bottom" Checked="DateFindRadio_Checked" Height="auto" IsChecked="False" Margin="10,0,284,0">
+                <RadioButton.ToolTip>Поиск записей по дате</RadioButton.ToolTip>
+            </RadioButton>
+            <RadioButton x:Name="DescriptionFindRadio" Content="Поиск по описанию" HorizontalAlignment="Center" VerticalAlignment="Bottom" Checked="DescriptionFindRadio_Checked" Height="auto" IsChecked="True" Margin="230,0,36,0">
+                <RadioButton.ToolTip>Поиск записей по описанию</RadioButton.ToolTip>
+            </RadioButton>
+        </Grid>
         <Viewbox Grid.Column="0">
             <Calendar x:Name="MainCalendar" HorizontalAlignment="Center" Width="173" Margin="0,0,0,10" SelectedDatesChanged="MainCalendar_SelectedDatesChanged"/>
         </Viewbox>
@@ -48,7 +57,5 @@
         <Button x:Name="UpdateEntry" Content="Редактировать запись" HorizontalAlignment="Center" Margin="0,70,0,0" Grid.Row="1" VerticalAlignment="Top" Width="142" Height="29"/>
         <Button x:Name="DeleteEntry" Content="Удалить запись" HorizontalAlignment="Center" Margin="0,125,0,0" Grid.Row="1" VerticalAlignment="Top" Width="142" RenderTransformOrigin="-0.107,-0.25" Height="29"/>
         <Button x:Name="Archive" Content="Архив" HorizontalAlignment="Center" Margin="0,180,0,0" Grid.Row="1" VerticalAlignment="Top" Width="73" Height="29"/>
-        <Button x:Name="BackPage" Content="Назад" Grid.Column="1" HorizontalAlignment="Left" Margin="25,433,0,0" Grid.Row="1" VerticalAlignment="Top" Width="45" Height="20"/>
-        <Button x:Name="NextPage" Content="Далее" Grid.Column="1" HorizontalAlignment="Left" Margin="437,433,0,0" Grid.Row="1" VerticalAlignment="Top" Width="45" Height="20" RenderTransformOrigin="-0.2,0.55"/>
     </Grid>
 </Window>

@@ -42,16 +42,7 @@ namespace application
         public void ListViewUpdate(List<Entry> mainListView)
         {
             ViewEntryes viewButton;
-            if (mainListView.Count <= 3)
-            {
-                BackPage.IsEnabled = false;
-                NextPage.IsEnabled = false;
-            }
-            else
-            {
-                viewButton = new ViewEntryes(mainGrid, ViewEntryes.GetPagesCount(mainListView.Count));
-                
-            }
+            viewButton = new ViewEntryes(mainGrid, ViewEntryes.GetPagesCount(mainListView.Count));
             mainListVliew_.ItemsSource = mainListView;
             mainListVliew_.Items.Refresh();
         }
