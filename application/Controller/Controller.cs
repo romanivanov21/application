@@ -80,7 +80,6 @@ namespace application.Controller
         private void FindButtonClick(object sender, EventArgs e)
         {
             string findBoxText = viewFind_.GetFindBoxText();
-            #warning: TDDO:Проверка данных на вилидность
             if ((findBoxText == "") || (findBoxText == "Поиск") || (findBoxText == "Поиск по дате") || (findBoxText == "Поиск по описанию"))
             {
                 MessageBox.Show("Введите параметры поиска");

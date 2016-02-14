@@ -14,25 +14,36 @@ namespace application
         {
             buttons_ = new List<Button>();
 
-            buttons_.Add(new Button() { Margin = new Thickness(25, 433, 0, 0), Content = "1", Width = 45, Height = 20 });
-            mainGrid.Children.Add(buttons_[0]);
-            Grid.SetRow(buttons_[0], 1);
-            Grid.SetColumn(buttons_[0], 1);
-
-            /*for (int i = 0; i < buttons_.Count; i++)
+            if (buttonCount > 1)
             {
-                buttons_.Add(new Button() { Margin = new Thickness(5), Content = i.ToString() });
-                mainGrid.Children.Add(buttons_[i]);
-                Grid.SetRow(buttons_[i], 2);
-                Grid.SetColumn(buttons_[i], 2);
-            }*/
+                buttons_.Add(new Button() { Margin = new Thickness(5), Content = "  Назад  " });
+                mainGrid.Children.Add(buttons_[0]);
+                Grid.SetRow(buttons_[0], 2);
+                Grid.SetColumn(buttons_[0], 0);
+                buttons_[0].HorizontalAlignment = HorizontalAlignment.Left;
+
+                for (int i = 1; i <= buttonCount; i++)
+                {
+                    buttons_.Add(new Button() { Margin = new Thickness(5), Content = i.ToString() });
+                    mainGrid.Children.Add(buttons_[i]);
+                    Grid.SetRow(buttons_[i], 2);
+                    Grid.SetColumn(buttons_[i], i);
+                    buttons_[i].HorizontalAlignment = HorizontalAlignment.Center;
+                }
+
+                buttons_.Add(new Button() { Margin = new Thickness(5), Content = "  Далее  " });
+                mainGrid.Children.Add(buttons_[buttonCount + 1]);
+                Grid.SetRow(buttons_[buttonCount + 1], 2);
+                Grid.SetColumn(buttons_[buttonCount + 1], 6);
+                buttons_[buttonCount + 1].HorizontalAlignment = HorizontalAlignment.Right;
+            }
         }
 
         //получить число страниц
         static public int GetPagesCount(int count)
         {
             int res = 0;
-            double doubleTemp = count / 3;
+            double doubleTemp = (double)count / 3.0;
             int intTemp = 0;
             if (doubleTemp == (int)doubleTemp)
             {
@@ -53,23 +64,6 @@ namespace application
                 res = intTemp;
             }
             return res;
-        }
-
-        public List<Button> getButtons
-        {
-            get
-            {
-                return buttons_;
-            }
-        }
-
-        public void SetButtonParams(int width, int heidt)
-        {
-            /*for (int i = 0; i < buttonCount_; i++)
-            {
-                buttons_[i].Width = width;
-                buttons_[i].Height = heidt;
-            }*/
         }
 
         private const uint buttonsCountMax_ = 6; 
