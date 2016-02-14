@@ -41,7 +41,9 @@ namespace application
 
         public void ListViewUpdate(List<Entry> mainListView)
         {
-            var viewButton = new ViewEntryes(ShowListView, ViewEntryes.GetPagesCount(mainListView.Count));
+            var viewButton = new ViewEntryes();
+            viewButton.DrowListViewPage(ShowListView, ViewEntryes.GetPagesCount(mainListView.Count));
+
             mainListVliew_.ItemsSource = mainListView;
             mainListVliew_.Items.Refresh();
         }
