@@ -11,13 +11,13 @@ namespace application.Model
     {
         public Entry(string date, ImageSource imgSource, string title)
         {
-            date_ = date;
-            imgSource_ = imgSource;
-            title_ = title;
+            Date = date;
+            ImgSource = imgSource;
+            Title = title;
         }
 
-        public string date_ { get; set; }
-        public ImageSource imgSource_ { get; set; }
-        public string title_ { get; set; }
+        public string Date { get; set; }
+        public ImageSource ImgSource { get; set; }
+        public string Title { get; set; }
     }
 }

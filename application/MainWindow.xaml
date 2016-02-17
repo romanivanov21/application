@@ -1,7 +1,7 @@
 ﻿<Window x:Class="application.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="718.328" Width="887.374">
+        Title="MainWindow" Height="702.328" Width="887.374">
     <Grid  Name ="mainGrid" ShowGridLines="True" Margin="0,0,2,21">
         <Grid.RowDefinitions>
             <RowDefinition Height="195*"></RowDefinition>
@@ -18,15 +18,15 @@
             <ListView.View>
                 <GridView>
                     <GridView.Columns>
-                        <GridViewColumn Header="Дата" Width="auto" DisplayMemberBinding="{Binding date_}" />
+                        <GridViewColumn Header="Дата" Width="auto" DisplayMemberBinding="{Binding Date}" />
                         <GridViewColumn Header="Фото" Width="auto">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Source="{Binding imgSource_}" />
+                                    <Image Source="{Binding ImgSource}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Описание" Width="auto" DisplayMemberBinding="{Binding title_}" />
+                        <GridViewColumn Header="Описание" Width="auto" DisplayMemberBinding="{Binding Title}" />
                     </GridView.Columns>
                 </GridView>
             </ListView.View>
@@ -52,21 +52,23 @@
                 <RadioButton.ToolTip>Поиск записей по описанию</RadioButton.ToolTip>
             </RadioButton>
         </Grid>
-        <Viewbox Grid.Column="0">
+        <Viewbox Grid.Row="0" Grid.Column="0">
             <Calendar x:Name="MainCalendar" HorizontalAlignment="Center" Width="173" Margin="0,0,0,10" SelectedDatesChanged="MainCalendar_SelectedDatesChanged"/>
         </Viewbox>
         <Button x:Name="CareateEntry" Grid.Column="0" Content="Создать запись" HorizontalAlignment="Center" Margin="29,20,29,0" Grid.Row="1" VerticalAlignment="Top" Width="142" Height="29"/>
-        <Button x:Name="UpdateEntry" Content="Редактировать запись" HorizontalAlignment="Center" Margin="29,70,29,0" Grid.Row="1" VerticalAlignment="Top" Width="142" Height="29"/>
-        <Button x:Name="DeleteEntry" Content="Удалить запись" HorizontalAlignment="Center" Margin="29,125,29,0" Grid.Row="1" VerticalAlignment="Top" Width="142" RenderTransformOrigin="-0.107,-0.25" Height="29"/>
-        <Button x:Name="Archive" Content="Архив" HorizontalAlignment="Center" Margin="65,180,63,0" Grid.Row="1" VerticalAlignment="Top" Width="72" Height="29"/>
+        <Button x:Name="UpdateEntry" Content="Редактировать запись" HorizontalAlignment="Center" Margin="29,70,29,0" Grid.Row="1"
+                Grid.Column="0" VerticalAlignment="Top" Width="142" Height="29"/>
+        <Button x:Name="DeleteEntry" Content="Удалить запись" HorizontalAlignment="Center" Margin="29,125,29,0" Grid.Row="1"
+                Grid.Column="0" VerticalAlignment="Top" Width="142" RenderTransformOrigin="-0.107,-0.25" Height="29"/>
+        <Button x:Name="Archive" Content="Архив" HorizontalAlignment="Center" Margin="65,180,63,0" Grid.Row="1"
+                Grid.Column="0" VerticalAlignment="Top" Width="72" Height="29"/>
         <StatusBar x:Name="Stsus" Height="20" Margin="0,0,0,-20" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Bottom" Width="auto"/>
         <Grid Name="ShowListView" ShowGridLines="True" Grid.Column="1" Height="36" Margin="10,0,0,0" Grid.Row="2" VerticalAlignment="Top">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="73*"/>
-                <ColumnDefinition Width="auto" MinWidth="72"/>
+                <ColumnDefinition Width="73*" />
                 <ColumnDefinition Width="auto" MinWidth="72"></ColumnDefinition>
                 <ColumnDefinition Width="auto" MinWidth="72"></ColumnDefinition>
                 <ColumnDefinition Width="auto" MinWidth="72"></ColumnDefinition>

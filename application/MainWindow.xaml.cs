@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using application.View;
 
 namespace application
 {
@@ -27,7 +28,7 @@ namespace application
         public MainWindow()
         {
             InitializeComponent();
-            conteroller_ = new application.Controller.Controller(this, this);
+            _conteroller = new application.Controller.Controller(this, this);
         }
 
         #region IView
@@ -41,11 +42,10 @@ namespace application
 
         public void ListViewUpdate(List<Entry> mainListView)
         {
-            var viewButton = new ViewEntryes();
-            viewButton.DrowListViewPage(ShowListView, ViewEntryes.GetPagesCount(mainListView.Count));
-
+            var viewButton = new ViewEntryes(mainListVliew_, ShowListView, mainListView);
             mainListVliew_.ItemsSource = mainListView;
             mainListVliew_.Items.Refresh();
+            viewButton.Drow();
         }
 
         #endregion
@@ -70,11 +70,7 @@ namespace application
 
         public string GetSelectedMainCalendarDate()
         {
-            if (MainCalendar.SelectedDate != null)
-            {
-                return MainCalendar.SelectedDate.Value.ToShortDateString();
-            }
-            return MainCalendar.DisplayDate.ToShortDateString();
+            return MainCalendar.SelectedDate != null ? MainCalendar.SelectedDate.Value.ToShortDateString() : MainCalendar.DisplayDate.ToShortDateString();
         }
 
         public void FindBoxSetText(string text)
@@ -85,7 +81,7 @@ namespace application
 
         public bool isDateFindRadiEnabeled()
         {
-            return DateFindRadio.IsChecked.Value;
+            return DateFindRadio.IsChecked != null && DateFindRadio.IsChecked.Value;
         }
 
         public string GetFindBoxText()
@@ -149,7 +145,7 @@ namespace application
         public event EventHandler findBoxsGotKeyboardFocus;
         public event EventHandler findButtonClick;
 
-        private application.Controller.Controller conteroller_;
+        private application.Controller.Controller _conteroller;
 
     }
 }

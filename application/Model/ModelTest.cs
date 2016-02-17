@@ -9,53 +9,57 @@ using System.Windows.Media;
 
 namespace application.Model
 {
-    class ModelTest
+    internal class ModelTest
     {
         public ModelTest()
         {
-            img1_ = new Image();
-            entryes_ = new List<Entry>();
+            _img1 = new Image();
+            EntryesList = new List<Entry>();
         }
 
-        public List<Entry> EntryesList
-        {
-            get
-            {
-                return this.entryes_;
-            }
-        }
+        public List<Entry> EntryesList { get; private set; }
+
         public void AddEntry(Entry entry)
         {
-            entryes_.Add(entry);
+            EntryesList.Add(entry);
         }
         public void FillTestData()
         {
-            ImageSourceConverter imgs = new ImageSourceConverter();
-            img1_.SetValue(Image.SourceProperty, imgs.ConvertFromString(@"..\\..\\IMG\IMG_0376.JPG"));
-            entryes_.Add(new Entry(DateTime.Now.ToShortDateString(), img1_.Source, "Запись1"));
-            img1_.SetValue(Image.SourceProperty, imgs.ConvertFromString(@"..\\..\\IMG\IMG_0261.JPG"));
-            entryes_.Add(new Entry("01.02.2016", img1_.Source, "Запись2"));
-            entryes_.Add(new Entry(DateTime.Now.ToShortDateString(), img1_.Source, "Запись3"));
-            entryes_.Add(new Entry("10.03.2015", img1_.Source, "Запись4"));
-            entryes_.Add(new Entry("09.03.2015", img1_.Source, "Запись5"));
-            entryes_.Add(new Entry(DateTime.Now.ToShortDateString(), img1_.Source, "Запись6"));
-            entryes_.Add(new Entry(DateTime.Now.ToShortDateString(), img1_.Source, "Запись7"));
+            var imgs = new ImageSourceConverter();
+            _img1.SetValue(Image.SourceProperty, imgs.ConvertFromString(@"..\\..\\IMG\IMG_0376.JPG"));
+            EntryesList.Add(new Entry(DateTime.Now.ToShortDateString(), _img1.Source, "Запись1"));
+            _img1.SetValue(Image.SourceProperty, imgs.ConvertFromString(@"..\\..\\IMG\IMG_0261.JPG"));
+            EntryesList.Add(new Entry("01.02.2016", _img1.Source, "Запись2"));
+            EntryesList.Add(new Entry(DateTime.Now.ToShortDateString(), _img1.Source, "Запись3"));
+            EntryesList.Add(new Entry("10.03.2015", _img1.Source, "Запись4"));
+            EntryesList.Add(new Entry("09.03.2015", _img1.Source, "Запись5"));
+            EntryesList.Add(new Entry(DateTime.Now.ToShortDateString(), _img1.Source, "Запись6"));
+            EntryesList.Add(new Entry(DateTime.Now.ToShortDateString(), _img1.Source, "Запись7"));
+            EntryesList.Add(new Entry(DateTime.Now.ToShortDateString(), _img1.Source, "Запись8"));
+            EntryesList.Add(new Entry(DateTime.Now.ToShortDateString(), _img1.Source, "Запись9"));
+            EntryesList.Add(new Entry(DateTime.Now.ToShortDateString(), _img1.Source, "Запись10"));
+            EntryesList.Add(new Entry(DateTime.Now.ToShortDateString(), _img1.Source, "Запись11"));
+            EntryesList.Add(new Entry(DateTime.Now.ToShortDateString(), _img1.Source, "Запись12"));
+            EntryesList.Add(new Entry(DateTime.Now.ToShortDateString(), _img1.Source, "Запись13"));
+            EntryesList.Add(new Entry(DateTime.Now.ToShortDateString(), _img1.Source, "Запись14"));
+            EntryesList.Add(new Entry(DateTime.Now.ToShortDateString(), _img1.Source, "Запись15"));
+            EntryesList.Add(new Entry(DateTime.Now.ToShortDateString(), _img1.Source, "Запись16"));
+
         }
         public List<Entry> GetEnrtyesByDate(string date)
         {
-            return entryes_.FindAll(x => (x.date_ == date));
+            return EntryesList.FindAll(x => (x.Date == date));
         }
         public List<Entry> GetThreeLastEntryes()
         {
-            List<Entry> res = new List<Entry>();
-            int lastIndex = entryes_.Count;
-            res.Add(entryes_[lastIndex - 1]);
-            res.Add(entryes_[lastIndex - 2]);
-            res.Add(entryes_[lastIndex - 3]);
+            var res = new List<Entry>();
+            var lastIndex = EntryesList.Count;
+            res.Add(EntryesList[lastIndex - 1]);
+            res.Add(EntryesList[lastIndex - 2]);
+            res.Add(EntryesList[lastIndex - 3]);
             return res;
         }
 
-        Image img1_;
-        private List<Entry> entryes_;
+        readonly Image _img1;
     }
 }

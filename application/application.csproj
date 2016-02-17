@@ -53,7 +53,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ViewEntryes.cs" />
+    <Compile Include="View\Page.cs" />
+    <Compile Include="View\ststic.cs" />
+    <Compile Include="View\ViewEntryes.cs" />
+    <Compile Include="View\NavigationLayout.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -105,6 +108,7 @@
   <ItemGroup>
     <Resource Include="IMG\IMG_0261.JPG" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
