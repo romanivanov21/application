@@ -53,10 +53,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="View\Page.cs" />
-    <Compile Include="View\ststic.cs" />
-    <Compile Include="View\ViewEntryes.cs" />
+    <Compile Include="Interface\IViewNavButtons.cs" />
     <Compile Include="View\NavigationLayout.cs" />
+    <Compile Include="View\ViewEntryes.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

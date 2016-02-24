@@ -23,11 +23,12 @@ namespace application
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, IView, IViewFind
+    public partial class MainWindow : IView, IViewFind
     {
         public MainWindow()
         {
             InitializeComponent();
+            _viewEntryes = new ViewEntryes();
             _conteroller = new application.Controller.Controller(this, this);
         }
 
@@ -42,10 +43,10 @@ namespace application
 
         public void ListViewUpdate(List<Entry> mainListView)
         {
-            var viewButton = new ViewEntryes(mainListVliew_, ShowListView, mainListView);
-            mainListVliew_.ItemsSource = mainListView;
-            mainListVliew_.Items.Refresh();
-            viewButton.Drow();
+            _viewEntryes.ShowListView = mainListVliew_;
+            _viewEntryes.NavigationGrid = ShowListView;
+            _viewEntryes.MainEntrys = mainListView;
+            _viewEntryes.Drow();
         }
 
         #endregion
@@ -145,6 +146,7 @@ namespace application
         public event EventHandler findBoxsGotKeyboardFocus;
         public event EventHandler findButtonClick;
 
+        private readonly ViewEntryes _viewEntryes;
         private application.Controller.Controller _conteroller;
 
     }

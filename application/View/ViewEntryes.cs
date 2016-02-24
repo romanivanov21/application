@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using application.Interface;
 using application.Model;
 
 namespace application.View
@@ -22,9 +24,10 @@ namespace application.View
 
     public class ViewEntryes
     {
-
-        public ViewEntryes(ListView listView, Grid navigationGrid, List<Entry> mainEntryes)
+        public ViewEntryes()
         {
+            ShowListView = new ListView();
+
             _buttonsLayout = new ButtonsLayout()
             {
                 ButtonActives = new bool[NavigationLayout.ButtonCount],
@@ -32,30 +35,112 @@ namespace application.View
                 ButtonContents = new string[NavigationLayout.ButtonCount],
                 ButtonAlignments = new HorizontalAlignment[NavigationLayout.ButtonCount]
             };
+
             _currentPageIndex = 1;
+
             for (var i = 0; i < NavigationLayout.ButtonCount; i++)
             {
                 _buttonsLayout.ButtonPositions[i].Row = 0;
                 _buttonsLayout.ButtonPositions[i].Colum = i;
             }
-            _pageCount = GetPagesCount(mainEntryes.Count);
-            _pages = new Page( listView, navigationGrid );
-            _currentEntryesList = mainEntryes;
+
+            _layout = new bool[NavigationLayout.ButtonCount];
+            _content = new string[NavigationLayout.ButtonCount];
+
+            _navigationLayout = new NavigationLayout();
+            _pageCount = GetPagesCount(1);
+
+            viewNavButtons_ = _navigationLayout;
+            viewNavButtons_.FourClick += ViewNavButtonsOnFourClick;
+            viewNavButtons_.NextClick += ViewNavButtonsOnNextClick;
+            viewNavButtons_.OneClick += ViewNavButtonsOnOneClick;
+            viewNavButtons_.PrevClick += ViewNavButtonsOnPrevClick;
+            viewNavButtons_.ThreClick += ViewNavButtonsOnThreClick;
+            viewNavButtons_.TwoClick += ViewNavButtonsOnTwoClick;
         }
 
         public void Drow()
         {
-            var layout = new bool[NavigationLayout.ButtonCount];
             var content = new string[NavigationLayout.ButtonCount];
 
-            SetLayout(layout, _pageCount);
+            _navigationLayout.ListViewGrid = NavigationGrid;
+            _pageCount = GetPagesCount(MainEntrys.Count);
+            
+            SetLayout(_layout, _pageCount);
             SetContent(content, _pageCount);
             
-            Inizialize(layout, content);
-            _pages.Drow(_buttonsLayout, _currentEntryesList);
+            Inizialize(_layout, content);
+            _navigationLayout.DrowButtons(_buttonsLayout);
+            ShowListView.ItemsSource = GetShowList();
+            ShowListView.Items.Refresh();
+        }
+        
+        public ListView ShowListView { get; set; }
+
+        public Grid NavigationGrid { get; set; }
+
+        public List<Entry> MainEntrys { get; set; }
+
+        private IEnumerable<Entry> GetShowList()
+        {
+            var indexFirst = 0;
+            var indexLast = 0;
+            var list = new List<Entry>(3);
+            int pageIndex = 1;
+
+            while ((indexLast < MainEntrys.Count) && (indexLast != 3))
+            {
+                ++indexLast;
+            }
+
+            for (int i = indexLast; (pageIndex != _currentPageIndex) && (indexLast < MainEntrys.Count); i++)
+            {
+                if ((indexLast - indexFirst) == 3)
+                {
+                    indexFirst = indexLast;
+                    pageIndex++;
+                }
+                indexLast++;
+            }
+
+            for (var i = indexFirst; i <  indexLast; i++)
+            {
+                list.Add(new Entry(MainEntrys[i].Date, MainEntrys[i].ImgSource, MainEntrys[i].Title));
+            }
+            return list;
         }
 
-        private void SetContent(IList<string> content, int index)
+        private void ViewNavButtonsOnPrevClick(object sender, EventArgs eventArgs)
+        {
+
+        }
+
+        private void ViewNavButtonsOnOneClick(object sender, EventArgs eventArgs)
+        {
+
+        }
+
+        private void ViewNavButtonsOnTwoClick(object sender, EventArgs eventArgs)
+        {
+
+        }
+
+        private void ViewNavButtonsOnThreClick(object sender, EventArgs eventArgs)
+        {
+
+        }
+
+        private void ViewNavButtonsOnFourClick(object sender, EventArgs eventArgs)
+        {
+
+        }
+
+        private void ViewNavButtonsOnNextClick(object sender, EventArgs eventArgs)
+        {
+
+        }
+
+        private static void SetContent(IList<string> content, int index)
         {
             if (index == 2)
             {
@@ -172,13 +257,23 @@ namespace application.View
             return res;
         }
 
-        private ButtonsLayout _buttonsLayout;
-        //число страниц
-        private readonly int _pageCount;
-        //текущая страница
-        private readonly int _currentPageIndex;
+        private bool[] _layout;
+
+        private string[] _content;
+
         public static double PageItemCount = 3.0;
-        private readonly Page _pages;
-        private readonly List<Entry> _currentEntryesList;
+
+        private readonly IViewNavButtons viewNavButtons_;
+
+        private readonly NavigationLayout _navigationLayout;
+
+        private ButtonsLayout _buttonsLayout;
+
+        //число страниц
+        private int _pageCount;
+
+        //текущая страница
+        private static int _currentPageIndex;
+
     }
 }

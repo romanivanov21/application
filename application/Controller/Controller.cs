@@ -24,20 +24,20 @@ namespace application.Controller
 
             #region Интерфейс IView
 
-            view_ = view;
-            view_.ListViewUpdate(model_.GetThreeLastEntryes());
-            view_.mainListVliewSelectionChanged += MainListVliewSelectionChanged;
+            _view = view;
+            _view.ListViewUpdate(model_.GetThreeLastEntryes());
+            _view.mainListVliewSelectionChanged += MainListVliewSelectionChanged;
 
             #endregion
 
             #region Интерфейс IViewFind
 
-            viewFind_ = viewFind;
-            viewFind_.dateFindRadioChecked += DateFindRadioChecked;
-            viewFind_.descriptionFindRadioChecked += DescriptionFindRadioChecked;
-            viewFind_.findBoxsGotKeyboardFocus += FindBoxsGotKeyboardFocus;
-            viewFind_.findButtonClick += FindButtonClick;
-            viewFind_.mainCalendarSelectedDatesChanged += MainCalendarSelectedDatesChanged;
+            _viewFind = viewFind;
+            _viewFind.dateFindRadioChecked += DateFindRadioChecked;
+            _viewFind.descriptionFindRadioChecked += DescriptionFindRadioChecked;
+            _viewFind.findBoxsGotKeyboardFocus += FindBoxsGotKeyboardFocus;
+            _viewFind.findButtonClick += FindButtonClick;
+            _viewFind.mainCalendarSelectedDatesChanged += MainCalendarSelectedDatesChanged;
 
             #endregion
         }
@@ -48,7 +48,7 @@ namespace application.Controller
 
         public void MainListVliewSelectionChanged(object sender, EventArgs e)
         {   //Надо реализовать в view
-            MessageBox.Show("Выбран запись № " + view_.GetMainListView().SelectedIndex);
+            MessageBox.Show("Выбран запись № " + _view.GetMainListView().SelectedIndex);
         }
 
         #endregion
@@ -57,52 +57,52 @@ namespace application.Controller
 
         public void DateFindRadioChecked(object sender, EventArgs e)
         {
-            if (viewFind_.GetSelectedMainCalendarDate() != null)
+            if (_viewFind.GetSelectedMainCalendarDate() != null)
             {
-                viewFind_.FindBoxSetText(viewFind_.GetSelectedMainCalendarDate());
+                _viewFind.FindBoxSetText(_viewFind.GetSelectedMainCalendarDate());
             }
             else
             {
-                viewFind_.FindBoxSetText("Поиск по дате");
+                _viewFind.FindBoxSetText("Поиск по дате");
             }
         }
 
         public void DescriptionFindRadioChecked(object sender, EventArgs e)
         {
-            viewFind_.FindBoxSetText("Поиск по описанию");
+            _viewFind.FindBoxSetText("Поиск по описанию");
         }
 
         public void FindBoxsGotKeyboardFocus(object sender, EventArgs e)
         {
-            viewFind_.FindBoxSetText("");
+            _viewFind.FindBoxSetText("");
         }
 
         private void FindButtonClick(object sender, EventArgs e)
         {
-            var findBoxText = viewFind_.GetFindBoxText();
+            var findBoxText = _viewFind.GetFindBoxText();
             if ((findBoxText == "") || (findBoxText == "Поиск") || (findBoxText == "Поиск по дате") || (findBoxText == "Поиск по описанию"))
             {
                 MessageBox.Show("Введите параметры поиска");
             }
-            else if(viewFind_.GetSelectedMainCalendarDate() == viewFind_.GetFindBoxText())
+            else if(_viewFind.GetSelectedMainCalendarDate() == _viewFind.GetFindBoxText())
             {
-                view_.ListViewUpdate(model_.GetEnrtyesByDate(viewFind_.GetFindBoxText()));
+                _view.ListViewUpdate(model_.GetEnrtyesByDate(_viewFind.GetFindBoxText()));
             }
         }
 
         private void MainCalendarSelectedDatesChanged(object sender, EventArgs e)
         {
-            if (viewFind_.isDateFindRadiEnabeled())
+            if (_viewFind.isDateFindRadiEnabeled())
             {
-                viewFind_.FindBoxSetText(viewFind_.GetSelectedMainCalendarDate());
+                _viewFind.FindBoxSetText(_viewFind.GetSelectedMainCalendarDate());
             }    
         }
         
         #endregion
 
         private ModelTest model_;
-        private IView view_;
-        private IViewFind viewFind_;
+        private readonly IView _view;
+        private readonly IViewFind _viewFind;
 
     }
 }
