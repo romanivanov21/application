@@ -53,8 +53,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Interface\IViewNavButtons.cs" />
-    <Compile Include="View\NavigationLayout.cs" />
+    <Compile Include="Interface\INavigationButtonsClick.cs" />
+    <Compile Include="View\NavigationButtonsDrow.cs" />
+    <Compile Include="View\NavigationButtonsLayoutProcessor.cs" />
     <Compile Include="View\ViewEntryes.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

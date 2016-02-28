@@ -54,9 +54,9 @@ namespace application.Model
         {
             var res = new List<Entry>();
             var lastIndex = EntryesList.Count;
-            res.Add(EntryesList[lastIndex - 1]);
-            res.Add(EntryesList[lastIndex - 2]);
             res.Add(EntryesList[lastIndex - 3]);
+            res.Add(EntryesList[lastIndex - 2]);
+            res.Add(EntryesList[lastIndex - 1]);
             return res;
         }
 

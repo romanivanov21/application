@@ -2,7 +2,7 @@
 
 namespace application.Interface
 {
-    internal interface IViewNavButtons
+    internal interface INavigationButtonsClick
     {
         event EventHandler FourClick;
         event EventHandler NextClick;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -7,70 +8,40 @@ using application.Model;
 
 namespace application.View
 {
-    public struct PageButtonContent
-    {
-        public static string GetButtonContent(int i)
-        {
-            return " " + i.ToString() + " ";
-        }
-        public static readonly string Next = " Далее ";
-        public static readonly string One = " 1 ";
-        public static readonly string Two = " 2 ";
-        public static readonly string Three = " 3 ";
-        public static readonly string Four = " 4 ";
-        public static readonly string Poins = " ... ";
-        public static readonly string Previus = " Назад ";
-    }
-
     public class ViewEntryes
     {
         public ViewEntryes()
         {
             ShowListView = new ListView();
-
-            _buttonsLayout = new ButtonsLayout()
-            {
-                ButtonActives = new bool[NavigationLayout.ButtonCount],
-                ButtonPositions = new ButtonPosition[NavigationLayout.ButtonCount],
-                ButtonContents = new string[NavigationLayout.ButtonCount],
-                ButtonAlignments = new HorizontalAlignment[NavigationLayout.ButtonCount]
-            };
-
+            
+            _navigationButtonsLayoutProcessor = new NavigationButtonsLayoutProcessor();
+            _navigationButtons = new NavigationButtonsDrow();
+            
             _currentPageIndex = 1;
+            _pageCount = GetPagesCount(0);
 
-            for (var i = 0; i < NavigationLayout.ButtonCount; i++)
-            {
-                _buttonsLayout.ButtonPositions[i].Row = 0;
-                _buttonsLayout.ButtonPositions[i].Colum = i;
-            }
+            _currentButtonIndex = 1;
 
-            _layout = new bool[NavigationLayout.ButtonCount];
-            _content = new string[NavigationLayout.ButtonCount];
-
-            _navigationLayout = new NavigationLayout();
-            _pageCount = GetPagesCount(1);
-
-            viewNavButtons_ = _navigationLayout;
-            viewNavButtons_.FourClick += ViewNavButtonsOnFourClick;
-            viewNavButtons_.NextClick += ViewNavButtonsOnNextClick;
-            viewNavButtons_.OneClick += ViewNavButtonsOnOneClick;
-            viewNavButtons_.PrevClick += ViewNavButtonsOnPrevClick;
-            viewNavButtons_.ThreClick += ViewNavButtonsOnThreClick;
-            viewNavButtons_.TwoClick += ViewNavButtonsOnTwoClick;
+            INavigationButtonsClick viewNavButtons = _navigationButtons;
+            viewNavButtons.FourClick += ViewNavButtonsFourClick;
+            viewNavButtons.NextClick += ViewNavButtonsNextClick;
+            viewNavButtons.OneClick += ViewNavButtonsOneClick;
+            viewNavButtons.PrevClick += ViewNavButtonsPrevClick;
+            viewNavButtons.ThreClick += ViewNavButtonsThreClick;
+            viewNavButtons.TwoClick += ViewNavButtonsTwoClick;
         }
 
         public void Drow()
         {
-            var content = new string[NavigationLayout.ButtonCount];
-
-            _navigationLayout.ListViewGrid = NavigationGrid;
             _pageCount = GetPagesCount(MainEntrys.Count);
-            
-            SetLayout(_layout, _pageCount);
-            SetContent(content, _pageCount);
-            
-            Inizialize(_layout, content);
-            _navigationLayout.DrowButtons(_buttonsLayout);
+
+            _navigationButtonsLayoutProcessor.PageCount = _pageCount;
+            _navigationButtonsLayoutProcessor.CurrentPageIndex = _currentPageIndex;
+            _navigationButtons.ButtonsGrid = NavigationGrid;
+            _navigationButtons.DrowButtons(_navigationButtonsLayoutProcessor.GetButtonsLayout());
+            _navigationButtons.MarkButtonClear();
+            _navigationButtons.MarkButton(_currentButtonIndex);
+
             ShowListView.ItemsSource = GetShowList();
             ShowListView.Items.Refresh();
         }
@@ -83,25 +54,13 @@ namespace application.View
 
         private IEnumerable<Entry> GetShowList()
         {
-            var indexFirst = 0;
+            var indexFirst = (_currentPageIndex - 1) * 3;
             var indexLast = 0;
-            var list = new List<Entry>(3);
-            int pageIndex = 1;
-
-            while ((indexLast < MainEntrys.Count) && (indexLast != 3))
+            while ((indexLast < MainEntrys.Count) && (indexLast - indexFirst) < 3)
             {
-                ++indexLast;
-            }
-
-            for (int i = indexLast; (pageIndex != _currentPageIndex) && (indexLast < MainEntrys.Count); i++)
-            {
-                if ((indexLast - indexFirst) == 3)
-                {
-                    indexFirst = indexLast;
-                    pageIndex++;
-                }
                 indexLast++;
             }
+            var list = new List<Entry>(3);
 
             for (var i = indexFirst; i <  indexLast; i++)
             {
@@ -110,134 +69,69 @@ namespace application.View
             return list;
         }
 
-        private void ViewNavButtonsOnPrevClick(object sender, EventArgs eventArgs)
+        private void ViewNavButtonsPrevClick(object sender, EventArgs eventArgs)
         {
-
-        }
-
-        private void ViewNavButtonsOnOneClick(object sender, EventArgs eventArgs)
-        {
-
-        }
-
-        private void ViewNavButtonsOnTwoClick(object sender, EventArgs eventArgs)
-        {
-
-        }
-
-        private void ViewNavButtonsOnThreClick(object sender, EventArgs eventArgs)
-        {
-
-        }
-
-        private void ViewNavButtonsOnFourClick(object sender, EventArgs eventArgs)
-        {
-
-        }
-
-        private void ViewNavButtonsOnNextClick(object sender, EventArgs eventArgs)
-        {
-
-        }
-
-        private static void SetContent(IList<string> content, int index)
-        {
-            if (index == 2)
+            if (_currentPageIndex > 1)
             {
-                content[1] = PageButtonContent.Previus;
-                content[2] = PageButtonContent.One;
-                content[3] = PageButtonContent.Two;
-                content[4] = PageButtonContent.Next;
-            }
-            else if (index == 3)
-            {
-                content[0] = PageButtonContent.Previus;
-                content[1] = PageButtonContent.One;
-                content[2] = PageButtonContent.Two;
-                content[3] = PageButtonContent.Three;
-                content[4] = PageButtonContent.Next;
-            }
-            else if (index == 4)
-            {
-                content[0] = PageButtonContent.Previus;
-                content[1] = PageButtonContent.One;
-                content[2] = PageButtonContent.Two;
-                content[3] = PageButtonContent.Three;
-                content[4] = PageButtonContent.Four;
-                content[5] = PageButtonContent.Next;
-            }
-            else if (index > 4)
-            {
-                content[0] = PageButtonContent.Previus;
-                content[1] = PageButtonContent.GetButtonContent(_currentPageIndex);
-                content[2] = PageButtonContent.GetButtonContent(_currentPageIndex + 1);
-                content[3] = PageButtonContent.Poins;
-                content[4] = PageButtonContent.GetButtonContent(index);
-                content[5] = PageButtonContent.Next;
-            }
-        }
-
-        private static void SetLayout(IList<bool> layout, int index)
-        {
-            if (index == 1)
-            {
-                for (var i = 0; i < NavigationLayout.ButtonCount; i++)
+                _currentPageIndex--;
+                if (_currentButtonIndex > 1)
                 {
-                    layout[i] = false;
+                    _currentButtonIndex--;
                 }
-            }
-            else if (index == 2)
-            {
-                for (var i = 0; i < NavigationLayout.ButtonCount; i++)
-                {
-                    if ((i == 1) || (i == 2) || (i == 3) || (i == 4))
-                    {
-                        layout[i] = true;
-                    }
-                }
-            }
-            else if (index == 3)
-            {
-                for (var i = 0; i < NavigationLayout.ButtonCount; i++)
-                {
-                    if ((i == 0) || (i == 1) || (i == 2) || (i == 3) || (i == 4))
-                    {
-                        layout[i] = true;
-                    }
-                }
-            }
-            else if (index >= 4)
-            {
-                for (var i = 0; i < NavigationLayout.ButtonCount; i++)
-                    layout[i] = true;
+                Drow();
             }
         }
 
-        private void Inizialize(bool[] layout, string [] content)
+        private void ViewNavButtonsOneClick(object sender, EventArgs eventArgs)
         {
-            _buttonsLayout.ButtonActives = layout;
-            _buttonsLayout.ButtonContents = content;
-            for (var i = 0; i < NavigationLayout.ButtonCount; i++)
-            {
-                _buttonsLayout.ButtonPositions[i].Row = 2;
-                _buttonsLayout.ButtonPositions[i].Colum = i;
-                if (i == 0)
-                {
-                    _buttonsLayout.ButtonAlignments[i] = HorizontalAlignment.Right;
-                    _buttonsLayout.ButtonContents[i] = content[i];
-                }
-                else if (i == 5)
-                {
-                    _buttonsLayout.ButtonAlignments[i] = HorizontalAlignment.Left;
-                    _buttonsLayout.ButtonContents[i] = content[i];
+            _currentButtonIndex = 1;
+            _currentPageIndex = _navigationButtonsLayoutProcessor.GetButtonContentIndex(_currentButtonIndex);
+            Drow();
+        }
 
+        private void ViewNavButtonsTwoClick(object sender, EventArgs eventArgs)
+        {
+            _currentButtonIndex = _navigationButtonsLayoutProcessor.GetButtonContentIndex(3) == -1 ? 1 : 2;
+            _currentPageIndex = _navigationButtonsLayoutProcessor.GetButtonContentIndex(2);
+            Drow();
+        }
+
+        private void ViewNavButtonsThreClick(object sender, EventArgs eventArgs)
+        {
+            _currentButtonIndex = _navigationButtonsLayoutProcessor.GetButtonContentIndex(3) == -1 ? 1 : 3;
+            _currentPageIndex = _navigationButtonsLayoutProcessor.GetButtonContentIndex(3);
+            Drow();
+        }
+
+        private void ViewNavButtonsFourClick(object sender, EventArgs eventArgs)
+        {
+            int contentIndex = _navigationButtonsLayoutProcessor.GetButtonContentIndex(4);
+            if (contentIndex != -1)
+            {
+                _currentButtonIndex = _navigationButtonsLayoutProcessor.GetButtonContentIndex(3) == -1 ? 1 : 4;
+                _currentPageIndex = contentIndex;
+                Drow();
+            }
+        }
+
+        private void ViewNavButtonsNextClick(object sender, EventArgs eventArgs)
+        {
+            if (_currentPageIndex <= _pageCount)
+            {
+                _currentPageIndex++;
+                if (_navigationButtonsLayoutProcessor.GetButtonContentIndex(3) == -1)
+                {
+                    _currentButtonIndex = 1;
                 }
                 else
                 {
-                    _buttonsLayout.ButtonAlignments[i] = HorizontalAlignment.Center;
-                    _buttonsLayout.ButtonContents[i] = content[i];
+                    if (_currentButtonIndex < 6)
+                    {
+                        _currentButtonIndex++;
+                    }
                 }
             }
+            Drow();
         }
 
         //получить число страниц
@@ -257,23 +151,18 @@ namespace application.View
             return res;
         }
 
-        private bool[] _layout;
-
-        private string[] _content;
-
         public static double PageItemCount = 3.0;
 
-        private readonly IViewNavButtons viewNavButtons_;
+        private readonly NavigationButtonsDrow _navigationButtons;
 
-        private readonly NavigationLayout _navigationLayout;
+        private readonly NavigationButtonsLayoutProcessor _navigationButtonsLayoutProcessor;
 
-        private ButtonsLayout _buttonsLayout;
-
+        private int _currentButtonIndex;
+        
         //число страниц
         private int _pageCount;
 
         //текущая страница
-        private static int _currentPageIndex;
-
+        private int _currentPageIndex;
     }
 }
