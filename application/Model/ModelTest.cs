@@ -32,7 +32,26 @@ namespace application.Model
             EntryesList.Add(new Entry("01.02.2016", _img1.Source, "Запись2"));
             EntryesList.Add(new Entry(DateTime.Now.ToShortDateString(), _img1.Source, "Запись3"));
             EntryesList.Add(new Entry("10.03.2015", _img1.Source, "Запись4"));
-            EntryesList.Add(new Entry("09.03.2015", _img1.Source, "Запись5"));
+            EntryesList.Add(new Entry("10.03.2015", _img1.Source, "Запись5"));
+            EntryesList.Add(new Entry("10.03.2015", _img1.Source, "Запись6"));
+            EntryesList.Add(new Entry("10.03.2015", _img1.Source, "Запись4.1"));
+            EntryesList.Add(new Entry("27.02.2016", _img1.Source, "Запись3.1"));
+            EntryesList.Add(new Entry("27.02.2016", _img1.Source, "Запись3.2"));
+            EntryesList.Add(new Entry("27.02.2016", _img1.Source, "Запись3.3"));
+            EntryesList.Add(new Entry("27.02.2016", _img1.Source, "Запись3.4"));
+            EntryesList.Add(new Entry("27.02.2016", _img1.Source, "Запись3.5"));
+            EntryesList.Add(new Entry("27.02.2016", _img1.Source, "Запись3.6"));
+            EntryesList.Add(new Entry("27.02.2016", _img1.Source, "Запись3.7"));
+            EntryesList.Add(new Entry("26.02.2016", _img1.Source, "Запись4.1"));
+            EntryesList.Add(new Entry("26.02.2016", _img1.Source, "Запись4.2"));
+            EntryesList.Add(new Entry("26.02.2016", _img1.Source, "Запись4.3"));
+            EntryesList.Add(new Entry("26.02.2016", _img1.Source, "Запись4.4"));
+            EntryesList.Add(new Entry("26.02.2016", _img1.Source, "Запись4.5"));
+            EntryesList.Add(new Entry("26.02.2016", _img1.Source, "Запись4.6"));
+            EntryesList.Add(new Entry("26.02.2016", _img1.Source, "Запись4.7"));
+            EntryesList.Add(new Entry("26.02.2016", _img1.Source, "Запись4.8"));
+            EntryesList.Add(new Entry("26.02.2016", _img1.Source, "Запись4.9"));
+            EntryesList.Add(new Entry("26.02.2016", _img1.Source, "Запись4.10"));
             EntryesList.Add(new Entry(DateTime.Now.ToShortDateString(), _img1.Source, "Запись6"));
             EntryesList.Add(new Entry(DateTime.Now.ToShortDateString(), _img1.Source, "Запись7"));
             EntryesList.Add(new Entry(DateTime.Now.ToShortDateString(), _img1.Source, "Запись8"));
@@ -60,6 +79,6 @@ namespace application.Model
             return res;
         }
 
-        readonly Image _img1;
+        private readonly Image _img1;
     }
 }

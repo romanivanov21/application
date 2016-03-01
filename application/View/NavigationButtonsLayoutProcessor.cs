@@ -21,7 +21,7 @@ namespace application.View
         private void SetButtonsActives()
         {
             //Все записи помещаются в одну страницу (число записей не превышает 3), то все кнопки не активны
-            if (PageCount == 1)
+            if (PageCount == 0 || PageCount == 1)
             {
                 for (var i = 0; i < NavigationButtonsDrow.ButtonCount; i++)
                 {
@@ -82,18 +82,54 @@ namespace application.View
             {
                 _navigationButtons.ButtonEnabeled[i] = true;
             }
-            if (_navigationButtons.ButtonContents[1] == PageButtonContent.One)
+
+            if (PageCount == 2)
             {
-                _navigationButtons.ButtonEnabeled[0] = false;
+                if (1 == CurrentPageIndex)
+                {
+                    _navigationButtons.ButtonEnabeled[1] = false;
+                }
+                if (PageCount == CurrentPageIndex) 
+                {
+                    _navigationButtons.ButtonEnabeled[4] = false;
+                }
             }
-            if (PageCount == CurrentPageIndex) //|| (CurrentPageIndex == PageCount - 1) ||
-                //(CurrentPageIndex == PageCount - 2) || (CurrentPageIndex == PageCount -3) )
+            else if (PageCount == 3)
             {
-                _navigationButtons.ButtonEnabeled[5] = false;
+                if (CurrentPageIndex == 1)
+                {
+                    _navigationButtons.ButtonEnabeled[0] = false;
+                }
+                if (PageCount == CurrentPageIndex)
+                {
+                    _navigationButtons.ButtonEnabeled[4] = false;
+                }
             }
-            if (_navigationButtons.ButtonContents[3] == PageButtonContent.Poins)
+            else if (PageCount == 4)
             {
-                _navigationButtons.ButtonEnabeled[3] = false;
+                if (CurrentPageIndex == 1)
+                {
+                    _navigationButtons.ButtonEnabeled[0] = false;
+                }
+                if (PageCount == CurrentPageIndex)
+                {
+                    _navigationButtons.ButtonEnabeled[5] = false;
+                }
+            }
+            else if (PageCount > 4)
+            {
+                if (_navigationButtons.ButtonContents[1] == PageButtonContent.One)
+                {
+                    _navigationButtons.ButtonEnabeled[0] = false;
+                }
+                if (PageCount == CurrentPageIndex)
+                {
+                    _navigationButtons.ButtonEnabeled[5] = false;
+                }
+                if (_navigationButtons.ButtonContents[3] == PageButtonContent.Poins)
+                {
+                    _navigationButtons.ButtonEnabeled[3] = false;
+                }
             }
         }
 
@@ -165,14 +201,11 @@ namespace application.View
 
         public ButtonsLayout GetButtonsLayout()
         {
-            if ((PageCount != 0) && (CurrentPageIndex != 0))
-            {
-                SetButtonsActives();
-                SetButtonContents();
-                SetButtonEnabeles();
-                SetButtonAlignments();
-                SetButtonsPosition();
-            }
+            SetButtonsActives();
+            SetButtonContents();
+            SetButtonEnabeles();
+            SetButtonAlignments();
+            SetButtonsPosition();
             return _navigationButtons;
         }
 

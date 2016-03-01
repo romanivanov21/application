@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Windows;
 using System.Windows.Controls;
 using application.Interface;
 using application.Model;
@@ -34,7 +32,10 @@ namespace application.View
         public void Drow()
         {
             _pageCount = GetPagesCount(MainEntrys.Count);
-
+            if ((_pageCount == 2) && (_currentPageIndex == 1))
+            {
+                _currentButtonIndex = 2;
+            }
             _navigationButtonsLayoutProcessor.PageCount = _pageCount;
             _navigationButtonsLayoutProcessor.CurrentPageIndex = _currentPageIndex;
             _navigationButtons.ButtonsGrid = NavigationGrid;
@@ -84,33 +85,74 @@ namespace application.View
 
         private void ViewNavButtonsOneClick(object sender, EventArgs eventArgs)
         {
-            _currentButtonIndex = 1;
-            _currentPageIndex = _navigationButtonsLayoutProcessor.GetButtonContentIndex(_currentButtonIndex);
-            Drow();
+            if (_pageCount == 2)
+            {
+                if (_pageCount > 1)
+                {
+                    _currentPageIndex--;
+                    Drow();
+                }
+            }
+            else
+            {
+                _currentButtonIndex = 1;
+                _currentPageIndex = _navigationButtonsLayoutProcessor.GetButtonContentIndex(_currentButtonIndex);
+                Drow();
+            }
         }
 
         private void ViewNavButtonsTwoClick(object sender, EventArgs eventArgs)
         {
-            _currentButtonIndex = _navigationButtonsLayoutProcessor.GetButtonContentIndex(3) == -1 ? 1 : 2;
-            _currentPageIndex = _navigationButtonsLayoutProcessor.GetButtonContentIndex(2);
-            Drow();
+            if (_pageCount == 2)
+            {
+                _currentPageIndex = 1;
+                _currentButtonIndex = 2;
+                Drow();
+            }
+            else
+            {
+                _currentButtonIndex = _navigationButtonsLayoutProcessor.GetButtonContentIndex(3) == -1 ? 1 : 2;
+                _currentPageIndex = _navigationButtonsLayoutProcessor.GetButtonContentIndex(2);
+                Drow();
+            }
         }
 
         private void ViewNavButtonsThreClick(object sender, EventArgs eventArgs)
         {
-            _currentButtonIndex = _navigationButtonsLayoutProcessor.GetButtonContentIndex(3) == -1 ? 1 : 3;
-            _currentPageIndex = _navigationButtonsLayoutProcessor.GetButtonContentIndex(3);
-            Drow();
+            if (_pageCount == 2)
+            {
+                _currentPageIndex = 2;
+                _currentButtonIndex = 3;
+                Drow();
+            }
+            else
+            {
+                _currentButtonIndex = _navigationButtonsLayoutProcessor.GetButtonContentIndex(3) == -1 ? 1 : 3;
+                _currentPageIndex = _navigationButtonsLayoutProcessor.GetButtonContentIndex(3);
+                Drow();
+            }
         }
 
         private void ViewNavButtonsFourClick(object sender, EventArgs eventArgs)
         {
-            int contentIndex = _navigationButtonsLayoutProcessor.GetButtonContentIndex(4);
-            if (contentIndex != -1)
+            if (_pageCount == 2 || _pageCount == 3)
             {
-                _currentButtonIndex = _navigationButtonsLayoutProcessor.GetButtonContentIndex(3) == -1 ? 1 : 4;
-                _currentPageIndex = contentIndex;
-                Drow();
+                if (_currentPageIndex < _pageCount)
+                {
+                    _currentPageIndex++;
+                    _currentButtonIndex++;
+                    Drow();
+                }
+            }
+            else
+            {
+                var contentIndex = _navigationButtonsLayoutProcessor.GetButtonContentIndex(4);
+                if (contentIndex != -1)
+                {
+                    _currentButtonIndex = _navigationButtonsLayoutProcessor.GetButtonContentIndex(3) == -1 ? 1 : 4;
+                    _currentPageIndex = contentIndex;
+                    Drow();
+                }
             }
         }
 

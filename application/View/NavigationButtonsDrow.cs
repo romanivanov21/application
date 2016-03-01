@@ -32,7 +32,6 @@ namespace application.View
     {
         public static int GetButtonIndex(string content)
         {
-            //Debug.Assert(content[0] == ' ' && content[2] == ' ');
             if (content != Poins)
             {
                 return int.Parse(content[1].ToString());
