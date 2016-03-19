@@ -1,0 +1,19 @@
+﻿<Window x:Class="application.View.AddImgWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AddImgWindow" Height="511.939" Width="1020.895">
+    <Grid  Name ="AddImg" ShowGridLines="True" Margin="0,0,2,21">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="434*"></RowDefinition>
+            <RowDefinition Height="36*"></RowDefinition>
+            <RowDefinition Height="0"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="160*"></ColumnDefinition>
+            <ColumnDefinition Width="667*"></ColumnDefinition>
+            <ColumnDefinition Width="184*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Image Name="ImageAdditionl" Grid.Column="1" HorizontalAlignment="Left" Height="405" Margin="10,10,0,0" VerticalAlignment="Top" Width="647" Source="{Binding ImgPath}"/>
+        <Button Grid.Row="0" Grid.Column="0" Content="Загрузить" HorizontalAlignment="Left" Margin="22,31,0,0" VerticalAlignment="Top" Width="113" Click="Button_Click" Height="30"/>
+    </Grid>
+</Window>

@@ -36,6 +36,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -53,7 +55,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controller\AddImage.cs" />
+    <Compile Include="Controller\CreateEntryController.cs" />
+    <Compile Include="Interface\ICreateEntry.cs" />
     <Compile Include="Interface\INavigationButtonsClick.cs" />
+    <Compile Include="View\AddImgWindow.xaml.cs">
+      <DependentUpon>AddImgWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddTextWindow.xaml.cs">
+      <DependentUpon>AddTextWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CreateEntryWindow.xaml.cs">
+      <DependentUpon>CreateEntryWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\NavigationButtonsDrow.cs" />
     <Compile Include="View\NavigationButtonsLayoutProcessor.cs" />
     <Compile Include="View\ViewEntryes.cs" />
@@ -72,6 +86,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\AddImgWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddTextWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CreateEntryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Entry.cs" />
@@ -108,7 +134,25 @@
   <ItemGroup>
     <Resource Include="IMG\IMG_0261.JPG" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="IMG\AddTextIMG\charactergrowfont.png" />
+    <Resource Include="IMG\AddTextIMG\charactershrinkfont.png" />
+    <Resource Include="IMG\AddTextIMG\editcopy.png" />
+    <Resource Include="IMG\AddTextIMG\editcut.png" />
+    <Resource Include="IMG\AddTextIMG\editpaste.png" />
+    <Resource Include="IMG\AddTextIMG\editredo.png" />
+    <Resource Include="IMG\AddTextIMG\editundo.png" />
+    <Resource Include="IMG\AddTextIMG\fileopen.png" />
+    <Resource Include="IMG\AddTextIMG\filesave.png" />
+    <Resource Include="IMG\AddTextIMG\listbullets.png" />
+    <Resource Include="IMG\AddTextIMG\listnumbering.png" />
+    <Resource Include="IMG\AddTextIMG\paragraphcenterjustify.png" />
+    <Resource Include="IMG\AddTextIMG\paragraphdecreaseindentation.png" />
+    <Resource Include="IMG\AddTextIMG\paragraphfulljustify.png" />
+    <Resource Include="IMG\AddTextIMG\paragraphincreaseindentation.png" />
+    <Resource Include="IMG\AddTextIMG\paragraphleftjustify.png" />
+    <Resource Include="IMG\AddTextIMG\paragraphrightjustify.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
