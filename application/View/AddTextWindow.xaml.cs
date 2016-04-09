@@ -1,32 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
+﻿using System.Windows;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using application.Interface;
 
 namespace application.View
 {
     /// <summary>
     /// Логика взаимодействия для AddTextWindows.xaml
     /// </summary>
-    public partial class AddTextWindows : Window
+    public partial class AddTextWindows : ITextInput
     {
         public AddTextWindows()
         {
             InitializeComponent();
+            _entry = InputText.Document;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            _createEntry.SetEntryViewer(InputText.Document);
+            Close();
         }
+
+        public void AddTextWindowShow()
+        {
+            Show();
+        }
+
+        public void AddTextWindowClose()
+        {
+            Close();
+        }
+
+        public FlowDocument GetInputText()
+        {
+            return _entry;
+        }
+
+        public void SetICreateEntry(ICreateEntry createEntry)
+        {
+            _createEntry = createEntry;
+        }
+
+        private static FlowDocument _entry;
+        private static ICreateEntry _createEntry;
     }
 }

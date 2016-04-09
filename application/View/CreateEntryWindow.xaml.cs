@@ -1,16 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using application.Controller;
 using application.Interface;
 
@@ -19,7 +12,7 @@ namespace application.View
     /// <summary>
     /// Логика взаимодействия для CreateEntryWindow.xaml
     /// </summary>
-    public partial class CreateEntryWindow : Window, ICreateEntry
+    public partial class CreateEntryWindow : ICreateEntry
     {
         public CreateEntryWindow()
         {
@@ -46,6 +39,15 @@ namespace application.View
         public Grid GetCreateEntryesGrid()
         {
             return CreateEntryGrid;
+        }
+
+        public void SetEntryViewer(FlowDocument flowDocument)
+        {
+            var blocList = flowDocument.Blocks.ToList();
+            foreach (var item in blocList)
+            {
+                CreatEntryViewer.Blocks.Add(item);
+            }
         }
 
         public event EventHandler AddNewImage;

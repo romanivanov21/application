@@ -9,12 +9,12 @@
                 <Setter Property="FontFamily" Value="Palatino Linotype"></Setter>
                 <Setter Property="Width" Value="30"></Setter>
                 <Setter Property="FontSize" Value ="14"></Setter>
-                <Setter Property="CommandTarget" Value="{Binding ElementName=mainRTB}"></Setter>
+                <!--<Setter Property="CommandTarget" Value="{Binding ElementName=mainRTB}"></Setter> -->
             </Style>
 
             <Style TargetType="{x:Type Button}" x:Key="FormatImageStyle">
                 <Setter Property="Width" Value="30"></Setter>
-                <Setter Property="CommandTarget" Value="{Binding ElementName=mainRTB}"></Setter>
+               <!--<Setter Property="CommandTarget" Value="{Binding ElementName=mainRTB}"></Setter> -->
             </Style>
         </Grid.Resources>
 

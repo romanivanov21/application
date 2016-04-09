@@ -9,32 +9,23 @@ namespace application.Controller
         public CreateEntryController(ICreateEntry createEntry)
         {
             _createEntry = createEntry;
-            _addImage = new AddImage();
-
-            createEntry.AddNewImage += CreateEntryOnAddNewImage;
-            createEntry.AddNewText += CreateEntryOnAddNewText;
+            _createEntry.AddNewImage += CreateEntryOnAddNewImage;
+            _createEntry.AddNewText += CreateEntryOnAddNewText;
         }
 
-        private static void CreateEntryOnAddNewText(object sender, EventArgs eventArgs)
+        public void CreateEntryOnAddNewText(object sender, EventArgs eventArgs)
         {
-            /*tb = new TextBlock { Width = 130, Height = 30, TextAlignment = TextAlignment.Center, Text = "123" };
-            Grid.SetRow(tb, 0);
-            Grid.SetColumn(tb, 1);
-            _createEntry.GetCreateEntryesGrid().Children.Add(tb);*/
-            var addText = new AddTextWindows();
-            addText.Show();
+            var addTextWindow = new AddTextWindows();
+            addTextWindow.Show();
+            addTextWindow.SetICreateEntry(_createEntry);
         }
 
-        private static void CreateEntryOnAddNewImage(object sender, EventArgs eventArgs)
+        private void CreateEntryOnAddNewImage(object sender, EventArgs eventArgs)
         {
             var addImg = new AddImgWindow();
             addImg.Show();
         }
 
-        //Point p;
-        //TextBlock tb;
-
         private readonly ICreateEntry _createEntry;
-        private readonly AddImage _addImage;
     }
 }
