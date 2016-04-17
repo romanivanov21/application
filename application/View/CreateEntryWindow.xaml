@@ -12,14 +12,14 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Button Grid.Row="0" Grid.Column="0" x:Name="AddImage" Content="Добавить изображение" HorizontalAlignment="Center" Margin="24,42,28,0" VerticalAlignment="Top" Width="142" Height="32" Click="AddImage_Click"/>
-        <Button x:Name="AddText" Grid.Row="0" Grid.Column="0" Content="Добавить текст" HorizontalAlignment="Left" Margin="24,103,0,0" VerticalAlignment="Top" Width="142" Height="30" Click="AddText_Click"/>
+        <Button x:Name="AddText" Grid.Row="0" Grid.Column="0" Content="Текст" HorizontalAlignment="Left" Margin="24,103,0,0" VerticalAlignment="Top" Width="142" Height="30" Click="AddText_Click"/>
 
         <FlowDocumentScrollViewer Grid.Row="0" Name="EntryViewer" Grid.Column="1" MinZoom="1" MaxZoom="1000" IsToolBarVisible="True">
-            <FlowDocument Name="CreatEntryViewer">
+            <FlowDocument>
                 <Paragraph>
                 </Paragraph>
             </FlowDocument>
         </FlowDocumentScrollViewer>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="24,168,0,0" VerticalAlignment="Top" Width="142" Height="27"/>
+        <Button Grid.Row="0" Grid.Column="0" Content="Button" HorizontalAlignment="Left" Margin="24,168,0,0" VerticalAlignment="Top" Width="142" Height="27"/>
     </Grid>
 </Window>

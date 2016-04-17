@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Windows;
 using System.Windows.Documents;
 using application.Interface;
 
@@ -9,39 +12,55 @@ namespace application.View
     /// </summary>
     public partial class AddTextWindows : ITextInput
     {
-        public AddTextWindows()
+        public AddTextWindows(FlowDocument document)
         {
             InitializeComponent();
-            _entry = InputText.Document;
+            _originalDocument = new FlowDocument();
+            AddDocument(document, _originalDocument);
+            AddDocument(document, InputText.Document);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void AddTextButton_Click(object sender, RoutedEventArgs e)
         {
-            _createEntry.SetEntryViewer(InputText.Document);
+            _originalDocument.Blocks.Clear();
+            AddDocument(InputText.Document, _originalDocument);
             Close();
         }
 
-        public void AddTextWindowShow()
+        private void Window_Closed(object sender, System.EventArgs e)
         {
-            Show();
+            _createEntry.SetEntryViewer(_originalDocument);
         }
 
-        public void AddTextWindowClose()
+        public static void AddDocument(FlowDocument from, FlowDocument to)
         {
-            Close();
+            var range = new TextRange(from.ContentStart, from.ContentEnd);
+            var stream = new MemoryStream();
+            System.Windows.Markup.XamlWriter.Save(range, stream);
+            range.Save(stream, DataFormats.XamlPackage);
+            var range2 = new TextRange(to.ContentEnd, to.ContentEnd);
+            range2.Load(stream, DataFormats.XamlPackage);
         }
 
-        public FlowDocument GetInputText()
+        public static void AddBlock(Block from, FlowDocument to)
         {
-            return _entry;
+            if (from != null)
+            {
+                var range = new TextRange(from.ContentStart, from.ContentEnd);
+                var stream = new MemoryStream();
+                System.Windows.Markup.XamlWriter.Save(range, stream);
+                range.Save(stream, DataFormats.XamlPackage);
+                var textRange2 = new TextRange(to.ContentEnd, to.ContentEnd);
+                textRange2.Load(stream, DataFormats.XamlPackage);
+            }
         }
-
         public void SetICreateEntry(ICreateEntry createEntry)
         {
             _createEntry = createEntry;
         }
 
-        private static FlowDocument _entry;
+        bool _isAddButtonClick;
+        private readonly FlowDocument _originalDocument;
         private static ICreateEntry _createEntry;
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Media.Imaging;
 using application.Controller;
 using application.Interface;
 
@@ -36,18 +37,35 @@ namespace application.View
             }
         }
 
+        public FlowDocument GetDocument()
+        {
+            return EntryViewer.Document;
+        }
+        
         public Grid GetCreateEntryesGrid()
         {
             return CreateEntryGrid;
         }
 
+        public void SetEntryImage(Image img)
+        {
+            var bitmapImageBitmapSource = new BitmapImage();
+            bitmapImageBitmapSource.BeginInit();
+            bitmapImageBitmapSource.UriSource = new Uri("@..\\..\\IMG\\IMG_0261.JPG");
+            bitmapImageBitmapSource.EndInit();
+            //BlockUIContainer blockUiContainer = new BlockUIContainer(bitmapImageBitmapSource);
+            //CreatEntryViewer.Blocks.Add(bitmapImageBitmapSource);
+        }
+
         public void SetEntryViewer(FlowDocument flowDocument)
         {
+            EntryViewer.Document = flowDocument;
+            /*CreatEntryViewer.Blocks.Clear();
             var blocList = flowDocument.Blocks.ToList();
             foreach (var item in blocList)
             {
                 CreatEntryViewer.Blocks.Add(item);
-            }
+            }*/
         }
 
         public event EventHandler AddNewImage;
@@ -55,6 +73,5 @@ namespace application.View
         public event EventHandler AddNewText;
 
         private CreateEntryController _createEntryController;
-
     }
 }

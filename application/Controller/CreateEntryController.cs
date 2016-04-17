@@ -15,15 +15,15 @@ namespace application.Controller
 
         public void CreateEntryOnAddNewText(object sender, EventArgs eventArgs)
         {
-            var addTextWindow = new AddTextWindows();
+            var addTextWindow = new AddTextWindows(_createEntry.GetDocument());
             addTextWindow.Show();
             addTextWindow.SetICreateEntry(_createEntry);
         }
 
         private void CreateEntryOnAddNewImage(object sender, EventArgs eventArgs)
         {
-            var addImg = new AddImgWindow();
-            addImg.Show();
+            var addImgWindow = new AddImgWindow(_createEntry);
+            addImgWindow.Show();
         }
 
         private readonly ICreateEntry _createEntry;

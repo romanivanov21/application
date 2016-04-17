@@ -11,5 +11,7 @@ namespace application.Interface
 
         Grid GetCreateEntryesGrid();
         void SetEntryViewer(FlowDocument flowDocument);
+        void SetEntryImage(Image img);
+        FlowDocument GetDocument();
     }
 }
