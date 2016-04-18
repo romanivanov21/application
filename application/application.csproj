@@ -36,6 +36,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -53,10 +55,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Common\FlowDocumentEdit.cs" />
+    <Compile Include="Common\AddImage.cs" />
+    <Compile Include="Controller\CreateEntryController.cs" />
+    <Compile Include="Controller\ShowEntryViewController.cs" />
+    <Compile Include="Interface\ICreateEntry.cs" />
     <Compile Include="Interface\INavigationButtonsClick.cs" />
-    <Compile Include="View\NavigationButtonsDrow.cs" />
-    <Compile Include="View\NavigationButtonsLayoutProcessor.cs" />
-    <Compile Include="View\ViewEntryes.cs" />
+    <Compile Include="Interface\IShowEntryView.cs" />
+    <Compile Include="View\AddImgWindow.xaml.cs">
+      <DependentUpon>AddImgWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CreateNewEntry.xaml.cs">
+      <DependentUpon>CreateNewEntry.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ShowEntryViewWindow.xaml.cs">
+      <DependentUpon>ShowEntryViewWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\NavigationButtons\NavigationButtonsDrow.cs" />
+    <Compile Include="View\NavigationButtons\NavigationButtonsLayoutProcessor.cs" />
+    <Compile Include="View\NavigationButtons\ViewEntryes.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -65,13 +82,25 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controller\Controller.cs" />
+    <Compile Include="Controller\MainController.cs" />
     <Compile Include="Interface\IView.cs" />
     <Compile Include="Interface\IViewFind.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\AddImgWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CreateNewEntry.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ShowEntryViewWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Entry.cs" />
@@ -107,6 +136,28 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="IMG\IMG_0261.JPG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="IMG\AddTextIMG\charactergrowfont.png" />
+    <Resource Include="IMG\AddTextIMG\charactershrinkfont.png" />
+    <Resource Include="IMG\AddTextIMG\editcopy.png" />
+    <Resource Include="IMG\AddTextIMG\editcut.png" />
+    <Resource Include="IMG\AddTextIMG\editpaste.png" />
+    <Resource Include="IMG\AddTextIMG\editredo.png" />
+    <Resource Include="IMG\AddTextIMG\editundo.png" />
+    <Resource Include="IMG\AddTextIMG\fileopen.png" />
+    <Resource Include="IMG\AddTextIMG\filesave.png" />
+    <Resource Include="IMG\AddTextIMG\listbullets.png" />
+    <Resource Include="IMG\AddTextIMG\listnumbering.png" />
+    <Resource Include="IMG\AddTextIMG\paragraphcenterjustify.png" />
+    <Resource Include="IMG\AddTextIMG\paragraphdecreaseindentation.png" />
+    <Resource Include="IMG\AddTextIMG\paragraphfulljustify.png" />
+    <Resource Include="IMG\AddTextIMG\paragraphincreaseindentation.png" />
+    <Resource Include="IMG\AddTextIMG\paragraphleftjustify.png" />
+    <Resource Include="IMG\AddTextIMG\paragraphrightjustify.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="IMG\AddTextIMG\addimg.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

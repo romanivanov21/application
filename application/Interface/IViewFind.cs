@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace application.Interface
 {
-    interface IViewFind
+    internal interface IViewFind
     {
         event EventHandler dateFindRadioChecked;
         event EventHandler descriptionFindRadioChecked;

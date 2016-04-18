@@ -1,21 +1,10 @@
-﻿using application.Controller;
-using application.Interface;
+﻿using application.Interface;
 using application.Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using application.View;
 
 namespace application
@@ -29,7 +18,7 @@ namespace application
         {
             InitializeComponent();
             _viewEntryes = new ViewEntryes();
-            _conteroller = new application.Controller.Controller(this, this);
+            _conteroller = new Controller.MainController(this, this);
         }
 
         #region IView
@@ -55,10 +44,16 @@ namespace application
 
         private void mainListVliew__SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (mainListVliewSelectionChanged != null)
+            if (MainListVliewSelectionChanged != null)
             {
-                mainListVliewSelectionChanged(sender, e);
+                MainListVliewSelectionChanged(sender, e);
             }
+        }
+
+        private void CareateEntry_Click(object sender, RoutedEventArgs e)
+        {
+            var createNewEntry = new CreateNewEntryWindow();
+            createNewEntry.Show();
         }
 
         #endregion
@@ -138,7 +133,7 @@ namespace application
 
         #endregion
 
-        public event EventHandler mainListVliewSelectionChanged;
+        public event EventHandler MainListVliewSelectionChanged;
 
         public event EventHandler mainCalendarSelectedDatesChanged;
         public event EventHandler dateFindRadioChecked;
@@ -147,7 +142,6 @@ namespace application
         public event EventHandler findButtonClick;
 
         private readonly ViewEntryes _viewEntryes;
-        private application.Controller.Controller _conteroller;
-
+        private Controller.MainController _conteroller;
     }
 }
