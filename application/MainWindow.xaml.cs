@@ -18,7 +18,7 @@ namespace application
         {
             InitializeComponent();
             _viewEntryes = new ViewEntryes();
-            _conteroller = new Controller.Controller(this, this);
+            _conteroller = new Controller.MainController(this, this);
         }
 
         #region IView
@@ -44,10 +44,16 @@ namespace application
 
         private void mainListVliew__SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (mainListVliewSelectionChanged != null)
+            if (MainListVliewSelectionChanged != null)
             {
-                mainListVliewSelectionChanged(sender, e);
+                MainListVliewSelectionChanged(sender, e);
             }
+        }
+
+        private void CareateEntry_Click(object sender, RoutedEventArgs e)
+        {
+            var createNewEntry = new CreateNewEntryWindow();
+            createNewEntry.Show();
         }
 
         #endregion
@@ -127,13 +133,7 @@ namespace application
 
         #endregion
 
-        private void CareateEntry_Click(object sender, RoutedEventArgs e)
-        {
-            var createEntryWindow = new CreateEntryWindow();
-            createEntryWindow.Show();
-        }
-
-        public event EventHandler mainListVliewSelectionChanged;
+        public event EventHandler MainListVliewSelectionChanged;
 
         public event EventHandler mainCalendarSelectedDatesChanged;
         public event EventHandler dateFindRadioChecked;
@@ -142,6 +142,6 @@ namespace application
         public event EventHandler findButtonClick;
 
         private readonly ViewEntryes _viewEntryes;
-        private Controller.Controller _conteroller;
+        private Controller.MainController _conteroller;
     }
 }

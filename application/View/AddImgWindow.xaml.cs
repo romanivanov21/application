@@ -12,11 +12,10 @@ namespace application.View
     /// </summary>
     public partial class AddImgWindow
     {
-        public AddImgWindow(ICreateEntry createEntry)
+        public AddImgWindow()
         {
             InitializeComponent();
             _addImage = new AddImage();
-            _createEntry = createEntry;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -32,13 +31,11 @@ namespace application.View
             }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void AddImgButton_Click(object sender, RoutedEventArgs e)
         {
-            Close();
-            _createEntry.SetEntryImage(ImageAdditionl);
+
         }
 
         private readonly AddImage _addImage;
-        private readonly ICreateEntry _createEntry;
     }
 }

@@ -55,23 +55,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controller\AddImage.cs" />
+    <Compile Include="Common\FlowDocumentEdit.cs" />
+    <Compile Include="Common\AddImage.cs" />
     <Compile Include="Controller\CreateEntryController.cs" />
+    <Compile Include="Controller\ShowEntryViewController.cs" />
     <Compile Include="Interface\ICreateEntry.cs" />
     <Compile Include="Interface\INavigationButtonsClick.cs" />
-    <Compile Include="Interface\ITextInput.cs" />
+    <Compile Include="Interface\IShowEntryView.cs" />
     <Compile Include="View\AddImgWindow.xaml.cs">
       <DependentUpon>AddImgWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\AddTextWindow.xaml.cs">
-      <DependentUpon>AddTextWindow.xaml</DependentUpon>
+    <Compile Include="View\CreateNewEntry.xaml.cs">
+      <DependentUpon>CreateNewEntry.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\CreateEntryWindow.xaml.cs">
-      <DependentUpon>CreateEntryWindow.xaml</DependentUpon>
+    <Compile Include="View\ShowEntryViewWindow.xaml.cs">
+      <DependentUpon>ShowEntryViewWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\NavigationButtonsDrow.cs" />
-    <Compile Include="View\NavigationButtonsLayoutProcessor.cs" />
-    <Compile Include="View\ViewEntryes.cs" />
+    <Compile Include="View\NavigationButtons\NavigationButtonsDrow.cs" />
+    <Compile Include="View\NavigationButtons\NavigationButtonsLayoutProcessor.cs" />
+    <Compile Include="View\NavigationButtons\ViewEntryes.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -80,7 +82,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controller\Controller.cs" />
+    <Compile Include="Controller\MainController.cs" />
     <Compile Include="Interface\IView.cs" />
     <Compile Include="Interface\IViewFind.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -91,11 +93,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\AddTextWindow.xaml">
+    <Page Include="View\CreateNewEntry.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\CreateEntryWindow.xaml">
+    <Page Include="View\ShowEntryViewWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -154,6 +156,10 @@
     <Resource Include="IMG\AddTextIMG\paragraphleftjustify.png" />
     <Resource Include="IMG\AddTextIMG\paragraphrightjustify.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="IMG\AddTextIMG\addimg.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

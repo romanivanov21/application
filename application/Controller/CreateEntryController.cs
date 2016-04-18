@@ -9,21 +9,15 @@ namespace application.Controller
         public CreateEntryController(ICreateEntry createEntry)
         {
             _createEntry = createEntry;
-            _createEntry.AddNewImage += CreateEntryOnAddNewImage;
-            _createEntry.AddNewText += CreateEntryOnAddNewText;
+            _createEntry.ShowNewEntryButtonClick += CreateEntryOnShowNewEntryButtonClick;
         }
 
-        public void CreateEntryOnAddNewText(object sender, EventArgs eventArgs)
+        private void CreateEntryOnShowNewEntryButtonClick(object sender, EventArgs eventArgs)
         {
-            var addTextWindow = new AddTextWindows(_createEntry.GetDocument());
-            addTextWindow.Show();
-            addTextWindow.SetICreateEntry(_createEntry);
-        }
-
-        private void CreateEntryOnAddNewImage(object sender, EventArgs eventArgs)
-        {
-            var addImgWindow = new AddImgWindow(_createEntry);
-            addImgWindow.Show();
+            var showEntryViewWindow = new ShowEntryViewWindow();
+            showEntryViewWindow.SetRichTextBoxDocument(_createEntry.GetRichTextBoxFlowDocument());
+            showEntryViewWindow.Show();
+            _createEntry.CloseCreateNewEntryWindow();
         }
 
         private readonly ICreateEntry _createEntry;

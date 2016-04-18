@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Windows.Controls;
 using System.Windows.Documents;
 
 namespace application.Interface
 {
     public interface ICreateEntry
     {
-        event EventHandler AddNewText;
-        event EventHandler AddNewImage;
+        FlowDocument GetRichTextBoxFlowDocument();
+        void CloseCreateNewEntryWindow();
 
-        Grid GetCreateEntryesGrid();
-        void SetEntryViewer(FlowDocument flowDocument);
-        void SetEntryImage(Image img);
-        FlowDocument GetDocument();
+        event EventHandler ShowNewEntryButtonClick;
     }
 }
