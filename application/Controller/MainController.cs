@@ -1,32 +1,28 @@
 ﻿using application.Interface;
 using application.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace application.Controller
 {
-    class Controller
+    internal class MainController
     {
         #region Конструктор 
 
-        public Controller(IView view, IViewFind viewFind)
+        public MainController(IView view, IViewFind viewFind)
         {
             #region Инициализация модели
 
-            model_ = new ModelTest();
-            model_.FillTestData();
+            _model = new ModelTest();
+            _model.FillTestData();
 
             #endregion
 
             #region Интерфейс IView
 
             _view = view;
-            _view.ListViewUpdate(model_.GetThreeLastEntryes());
-            _view.mainListVliewSelectionChanged += MainListVliewSelectionChanged;
+            _view.ListViewUpdate(_model.GetThreeLastEntryes());
+            _view.MainListVliewSelectionChanged += MainListVliewSelectionChanged;
 
             #endregion
 
@@ -86,7 +82,7 @@ namespace application.Controller
             }
             else if(_viewFind.GetSelectedMainCalendarDate() == _viewFind.GetFindBoxText())
             {
-                _view.ListViewUpdate(model_.GetEnrtyesByDate(_viewFind.GetFindBoxText()));
+                _view.ListViewUpdate(_model.GetEnrtyesByDate(_viewFind.GetFindBoxText()));
             }
         }
 
@@ -100,9 +96,8 @@ namespace application.Controller
         
         #endregion
 
-        private ModelTest model_;
+        private readonly ModelTest _model;
         private readonly IView _view;
         private readonly IViewFind _viewFind;
-
     }
 }

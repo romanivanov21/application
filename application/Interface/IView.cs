@@ -10,6 +10,6 @@ namespace application.Interface
         void ListViewUpdate(List<Entry> mainListView);
         ListView GetMainListView();
 
-        event EventHandler mainListVliewSelectionChanged;
+        event EventHandler MainListVliewSelectionChanged;
     }
 }

@@ -1,0 +1,25 @@
+﻿<Window x:Class="application.View.ShowEntryViewWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="CreateEntryWindow" Height="660" Width="1135">
+    <Grid  Name ="CreateEntryGrid" ShowGridLines="True" Margin="0,0,2,21">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="195*"></RowDefinition>
+            <RowDefinition Height="0"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" MinWidth="194"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <FlowDocumentScrollViewer Grid.Row="0" Name="EntryViewer" Grid.Column="1" MinZoom="1" MaxZoom="1000" IsToolBarVisible="True">
+            <FlowDocument>
+                <Paragraph>
+                </Paragraph>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+
+        <Button x:Name="EditEntry" Grid.Row="0" Grid.Column="0" Content="Редактировать запись" HorizontalAlignment="Left" Margin="25,56,0,0" VerticalAlignment="Top" Width="142" Height="30" Click="EditEntry_Click"/>
+        <Button x:Name="SaveEntry" Grid.Row="0" Grid.Column="0" Content="Созранить запись" HorizontalAlignment="Left" Margin="25,115,0,0" VerticalAlignment="Top" Width="142" RenderTransformOrigin="0.053,0.5" Height="30" Click="SaveEntry_Click"/>
+    </Grid>
+</Window>
