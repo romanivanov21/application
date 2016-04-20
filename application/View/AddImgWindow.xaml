@@ -14,7 +14,7 @@
             <ColumnDefinition Width="184*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Image Name="ImageAdditionl" Grid.Column="1" HorizontalAlignment="Left" Height="374" Margin="10,10,0,0" VerticalAlignment="Top" Width="647" Source="{Binding ImgPath}"/>
-        <Button Grid.Row="0" Grid.Column="0" Content="Загрузить" HorizontalAlignment="Left" Margin="22,31,0,0" VerticalAlignment="Top" Width="113" Click="Button_Click" Height="30"/>
+        <Button Grid.Row="0" Grid.Column="0" Name="ImgLoadingButton"  Content="Загрузить" HorizontalAlignment="Left" Margin="22,31,0,0" VerticalAlignment="Top" Width="113" Click="ImgLoadingButton_Click" Height="30"/>
         <Button Name="AddImgButton" Content="Добавить" Grid.Column="1" HorizontalAlignment="Left" Margin="540,9,0,0" Grid.Row="1" VerticalAlignment="Top" Width="117" Height="30" Click="AddImgButton_Click"/>
     </Grid>
 </Window>

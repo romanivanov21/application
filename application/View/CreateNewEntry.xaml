@@ -77,8 +77,8 @@
                 <Button Style="{StaticResource FormatImageStyle}" Command="EditingCommands.DecreaseIndentation" ToolTip="Decrease Indent">
                     <Image Source="../IMG/AddTextIMG/ParagraphDecreaseIndentation.png"></Image>
                 </Button>
-                <Button Style="{StaticResource FormatImageStyle}" ToolTip="Добавить изображение" Height="30" Margin="0,0,0,-5" Click="Button_Click" Width="29" VerticalAlignment="Top" RenderTransformOrigin="0.448,0.133">
-                    <Image Source="../IMG/AddTextIMG/addimg.png" RenderTransformOrigin="0.609,-0.13" Height="20" Width="29"></Image>
+                <Button Style="{StaticResource FormatImageStyle}" Name="AddNewImgButton" ToolTip="Добавить изображение" Height="30" Margin="0,0,0,-5" Width="29" VerticalAlignment="Top" RenderTransformOrigin="0.448,0.133" Click="AddNewImgButton_Click">
+                    <Image Source="../IMG/AddTextIMG/addimg.png" RenderTransformOrigin="0.5,0.5" Height="20" Width="29"></Image>
                 </Button>
             </ToolBar>
             <!--<StackPanel Width="1026" Margin="0,5,0,-14"> -->

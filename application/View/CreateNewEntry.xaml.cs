@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Windows;
 using System.Windows.Documents;
 using application.Controller;
@@ -15,6 +14,7 @@ namespace application.View
         public CreateNewEntryWindow()
         {
             InitializeComponent();
+
             _controller = new CreateEntryController(this);
         }
 
@@ -36,15 +36,14 @@ namespace application.View
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void AddNewImgButton_Click(object sender, RoutedEventArgs e)
         {
-            var addImg = new AddImgWindow();
+            var addImg = new AddImgWindow(RichTextBoxFlowDocument);
             addImg.Show();
         }
 
         public event EventHandler ShowNewEntryButtonClick;
 
         private CreateEntryController _controller;
-        private static ICreateEntry _createEntry;
     }
 }

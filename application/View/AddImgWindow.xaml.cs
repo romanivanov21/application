@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows;
-using System.Windows.Media.Imaging;
+using System.Windows.Controls;
+using System.Windows.Media;
 using application.Controller;
 using application.Interface;
 
@@ -10,32 +10,45 @@ namespace application.View
     /// <summary>
     /// Логика взаимодействия для AddImgWindow.xaml
     /// </summary>
-    public partial class AddImgWindow
+    public partial class AddImgWindow : IAddImg
     {
-        public AddImgWindow()
+        public AddImgWindow(RichTextBox richTextBox)
         {
             InitializeComponent();
-            _addImage = new AddImage();
+            _richTextBox = richTextBox;
+            _controller = new AddImgController(this);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public void SetImageAditionalSource(ImageSource source)
         {
-            _addImage.GetImagePath();
-            if (_addImage.ImagePath != "")
+            ImageAdditionl.Source = source;
+        }
+
+        public RichTextBox GetRichTextBoxt()
+        {
+            return _richTextBox;
+        }
+
+        private void ImgLoadingButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ImgLoadingButtonClick != null)
             {
-                var bitmapImageBitmapSource = new BitmapImage();
-                bitmapImageBitmapSource.BeginInit();
-                bitmapImageBitmapSource.UriSource = new Uri(_addImage.ImagePath);
-                bitmapImageBitmapSource.EndInit();
-                ImageAdditionl.Source = bitmapImageBitmapSource;
+                ImgLoadingButtonClick(sender, e);
             }
         }
 
         private void AddImgButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (AddImgButtonClick != null)
+            {
+                AddImgButtonClick(sender, e);
+            }
         }
 
-        private readonly AddImage _addImage;
+        public event EventHandler AddImgButtonClick;
+        public event EventHandler ImgLoadingButtonClick;
+
+        private readonly RichTextBox _richTextBox;
+        private AddImgController _controller;
     }
 }

@@ -1,28 +1,23 @@
-﻿using System.IO;
-using Microsoft.Win32;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Windows.Media.Imaging;
+using Microsoft.Win32;
 
-namespace application.Controller
+namespace application.Common
 {
-    public class AddImage
+    public static class AddImage
     {
-        public AddImage()
+        public static void GetImagePath()
         {
-            ImagePath = "";
-            _openFileDialog = new OpenFileDialog
+            var openFileDialog = new OpenFileDialog
             {
-                Multiselect = false, 
+                Multiselect = false,
                 Filter = "Image files (*.JPG)|*.JPG|All files (*.*)|*.*"
-            };
-        }
-
-        public void GetImagePath()
-        {
-            if (_openFileDialog.ShowDialog() == true)
+            }; 
+            if (openFileDialog.ShowDialog() == true)
             {
-                ImagePath = _openFileDialog.FileName;
+                ImagePath = openFileDialog.FileName;
             }
         }
         public static Bitmap ToWinFormsBitmap(BitmapSource bitmapsource)
@@ -61,8 +56,6 @@ namespace application.Controller
             }
         }
 
-        public string ImagePath { get; private set; }
-
-        private readonly OpenFileDialog _openFileDialog;
+        public static string ImagePath { get; private set; }
     }
 }

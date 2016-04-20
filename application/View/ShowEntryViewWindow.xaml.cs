@@ -24,7 +24,10 @@ namespace application.View
 
         private void SaveEntry_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-
+            if (SaveEntryClick != null)
+            {
+                SaveEntryClick(sender, e);
+            }
         }
 
         private void EditEntry_Click(object sender, System.Windows.RoutedEventArgs e)

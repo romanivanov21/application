@@ -57,8 +57,10 @@
     </ApplicationDefinition>
     <Compile Include="Common\FlowDocumentEdit.cs" />
     <Compile Include="Common\AddImage.cs" />
+    <Compile Include="Controller\AddImgController.cs" />
     <Compile Include="Controller\CreateEntryController.cs" />
     <Compile Include="Controller\ShowEntryViewController.cs" />
+    <Compile Include="Interface\IAddImg.cs" />
     <Compile Include="Interface\ICreateEntry.cs" />
     <Compile Include="Interface\INavigationButtonsClick.cs" />
     <Compile Include="Interface\IShowEntryView.cs" />
