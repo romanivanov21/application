@@ -26,11 +26,12 @@ namespace application.Controller
 
         private void AddImgOnImgLoadingButtonClick(object sender, EventArgs eventArgs)
         {
-            AddImage.GetImagePath();
-            if (AddImage.ImagePath != "")
+            var source = AddImage.GetImageSource();
+            if ((source != "") && (source != AddImage.OpenImageSource))
             {
+                AddImage.OpenImageSource = source;
                 _bitmapImage.BeginInit();
-                _bitmapImage.UriSource = new Uri(AddImage.ImagePath);
+                _bitmapImage.UriSource = new Uri(source);
                 _bitmapImage.EndInit();
                 _addImg.SetImageAditionalSource(_bitmapImage);
             }

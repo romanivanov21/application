@@ -8,8 +8,9 @@ namespace application.Common
 {
     public static class AddImage
     {
-        public static void GetImagePath()
+        public static string GetImageSource()
         {
+            var source = "";
             var openFileDialog = new OpenFileDialog
             {
                 Multiselect = false,
@@ -17,9 +18,11 @@ namespace application.Common
             }; 
             if (openFileDialog.ShowDialog() == true)
             {
-                ImagePath = openFileDialog.FileName;
+                source = openFileDialog.FileName;
             }
+            return source;
         }
+
         public static Bitmap ToWinFormsBitmap(BitmapSource bitmapsource)
         {
             using (var stream = new MemoryStream())
@@ -56,6 +59,6 @@ namespace application.Common
             }
         }
 
-        public static string ImagePath { get; private set; }
+        public static string OpenImageSource { get; set; }
     }
 }
