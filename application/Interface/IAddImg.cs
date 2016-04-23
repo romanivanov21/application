@@ -9,7 +9,10 @@ namespace application.Interface
         event EventHandler ImgLoadingButtonClick;
         event EventHandler AddImgButtonClick;
 
+        ImageSource GetImageAditionalSource();
         void SetImageAditionalSource(ImageSource source);
+        void SetAtitionalImageSourcePath(string source);
+        void AddImgWindowClose();
         RichTextBox GetRichTextBoxt();
     }
 }

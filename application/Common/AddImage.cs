@@ -8,19 +8,19 @@ namespace application.Common
 {
     public static class AddImage
     {
-        public static string GetImageSource()
+        public static string GetImageSourcePatch()
         {
-            var source = "";
             var openFileDialog = new OpenFileDialog
             {
                 Multiselect = false,
                 Filter = "Image files (*.JPG)|*.JPG|All files (*.*)|*.*"
-            }; 
+            };
+            var result = "";
             if (openFileDialog.ShowDialog() == true)
             {
-                source = openFileDialog.FileName;
+                result = openFileDialog.FileName;
             }
-            return source;
+            return result;
         }
 
         public static Bitmap ToWinFormsBitmap(BitmapSource bitmapsource)

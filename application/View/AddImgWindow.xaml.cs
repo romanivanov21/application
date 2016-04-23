@@ -19,6 +19,22 @@ namespace application.View
             _controller = new AddImgController(this);
         }
 
+        public ImageSource GetImageAditionalSource()
+        {
+            return ImageAdditionl.Source;
+        }
+
+        public void SetAtitionalImageSourcePath(string sourcePath)
+        {
+            var imgSource = new ImageSourceConverter();
+            ImageAdditionl.SetValue(Image.SourceProperty, imgSource.ConvertFromString(sourcePath));
+        }
+
+        public void AddImgWindowClose()
+        {
+            Close();
+        }
+
         public void SetImageAditionalSource(ImageSource source)
         {
             ImageAdditionl.Source = source;

@@ -20,21 +20,15 @@ namespace application.Controller
         public void SetImageRichTextBox()
         {
             var richTextBox = _addImg.GetRichTextBoxt();
-            Clipboard.SetImage(_bitmapImage);
+            var bitmapImage = new BitmapImage(new Uri(_addImg.GetImageAditionalSource().ToString()));
+            Clipboard.SetImage(bitmapImage);
             richTextBox.Paste();
+            _addImg.AddImgWindowClose();
         }
 
         private void AddImgOnImgLoadingButtonClick(object sender, EventArgs eventArgs)
         {
-            var source = AddImage.GetImageSource();
-            if ((source != "") && (source != AddImage.OpenImageSource))
-            {
-                AddImage.OpenImageSource = source;
-                _bitmapImage.BeginInit();
-                _bitmapImage.UriSource = new Uri(source);
-                _bitmapImage.EndInit();
-                _addImg.SetImageAditionalSource(_bitmapImage);
-            }
+            _addImg.SetAtitionalImageSourcePath(AddImage.GetImageSourcePatch());
         }
 
         private void AddImgOnAddImgButtonClick(object sender, EventArgs eventArgs)
