@@ -7,6 +7,7 @@ namespace application.Interface
     internal interface IAddImg
     {
         event EventHandler ImgLoadingButtonClick;
+        event EventHandler CancelButtonClick;
         event EventHandler AddImgButtonClick;
 
         ImageSource GetImageAditionalSource();

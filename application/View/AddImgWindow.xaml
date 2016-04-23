@@ -9,12 +9,15 @@
             <RowDefinition Height="0"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="160*"></ColumnDefinition>
-            <ColumnDefinition Width="667*"></ColumnDefinition>
-            <ColumnDefinition Width="184*"></ColumnDefinition>
+            <ColumnDefinition Width="155*"></ColumnDefinition>
+            <ColumnDefinition Width="716*"></ColumnDefinition>
+            <ColumnDefinition Width="140*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Image Name="ImageAdditionl" Grid.Column="1" HorizontalAlignment="Left" Height="374" Margin="10,10,0,0" VerticalAlignment="Top" Width="647" Source="{Binding ImgPath}"/>
-        <Button Grid.Row="0" Grid.Column="0" Name="ImgLoadingButton"  Content="Загрузить" HorizontalAlignment="Left" Margin="22,31,0,0" VerticalAlignment="Top" Width="113" Click="ImgLoadingButton_Click" Height="30"/>
-        <Button Name="AddImgButton" Content="Добавить" Grid.Column="1" HorizontalAlignment="Left" Margin="540,9,0,0" Grid.Row="1" VerticalAlignment="Top" Width="117" Height="30" Click="AddImgButton_Click"/>
+        <Image Name="ImageAdditionl" Grid.Column="1" HorizontalAlignment="Center" Source="{Binding ImgPath}"/>
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <Button Name="ImgLoadingButton" Content="Выбор фото" Margin="33,40,34,341" Click="ImgLoadingButton_Click" Height="30"/>
+        </StackPanel>
+        <Button Name="AddImgButton" Content="Добавить" Grid.Column="1" HorizontalAlignment="Left" Margin="0,9,0,0" Grid.Row="1" VerticalAlignment="Top" Width="106" Height="30" Click="AddImgButton_Click"/>
+        <Button Name="Cancel" Content="Отмена" Grid.Column="1" HorizontalAlignment="Right" Margin="606,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" Height="29" Click="Cancel_Click"/>
     </Grid>
 </Window>

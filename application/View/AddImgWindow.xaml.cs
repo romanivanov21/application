@@ -27,7 +27,10 @@ namespace application.View
         public void SetAtitionalImageSourcePath(string sourcePath)
         {
             var imgSource = new ImageSourceConverter();
-            ImageAdditionl.SetValue(Image.SourceProperty, imgSource.ConvertFromString(sourcePath));
+            if (sourcePath != "")
+            {
+                ImageAdditionl.SetValue(Image.SourceProperty, imgSource.ConvertFromString(sourcePath));
+            }
         }
 
         public void AddImgWindowClose()
@@ -53,6 +56,14 @@ namespace application.View
             }
         }
 
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            if (CancelButtonClick != null)
+            {
+                CancelButtonClick(sender, e);
+            }
+        }
+
         private void AddImgButton_Click(object sender, RoutedEventArgs e)
         {
             if (AddImgButtonClick != null)
@@ -62,9 +73,11 @@ namespace application.View
         }
 
         public event EventHandler AddImgButtonClick;
+        public event EventHandler CancelButtonClick;
         public event EventHandler ImgLoadingButtonClick;
 
         private readonly RichTextBox _richTextBox;
         private AddImgController _controller;
+
     }
 }

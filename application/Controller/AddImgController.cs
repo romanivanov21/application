@@ -11,18 +11,28 @@ namespace application.Controller
         public AddImgController(IAddImg addImg)
         {
             _addImg = addImg;
-            _bitmapImage = new BitmapImage();
 
             _addImg.AddImgButtonClick += AddImgOnAddImgButtonClick;
             _addImg.ImgLoadingButtonClick += AddImgOnImgLoadingButtonClick;
+            _addImg.CancelButtonClick += AddImgOnCancelButtonClick;
         }
 
         public void SetImageRichTextBox()
         {
             var richTextBox = _addImg.GetRichTextBoxt();
-            var bitmapImage = new BitmapImage(new Uri(_addImg.GetImageAditionalSource().ToString()));
+            var bitmapImage = new BitmapImage();
+            bitmapImage.BeginInit();
+            bitmapImage.UriSource = new Uri(_addImg.GetImageAditionalSource().ToString());
+            bitmapImage.DecodePixelHeight = 40;
+            bitmapImage.DecodePixelWidth = 50;
+            bitmapImage.EndInit();
             Clipboard.SetImage(bitmapImage);
             richTextBox.Paste();
+            _addImg.AddImgWindowClose();
+        }
+
+        private void AddImgOnCancelButtonClick(object sender, EventArgs eventArgs)
+        {
             _addImg.AddImgWindowClose();
         }
 
@@ -37,6 +47,5 @@ namespace application.Controller
         }
 
         private readonly IAddImg _addImg;
-        private readonly BitmapImage _bitmapImage;
     }
 }
